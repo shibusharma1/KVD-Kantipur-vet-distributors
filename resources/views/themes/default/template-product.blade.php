@@ -12,7 +12,7 @@
                 <a href="{{ url('/') }}">HOME</a> / Product
             </h3>
             <h1 class="uk-margin-small-top">{{$data->post_title}}</h1>
-        </div>
+        </div>      
     </div>
 </div>
 <!--------------------------- banner section end ------------------------------------->

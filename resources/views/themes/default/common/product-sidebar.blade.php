@@ -1,14 +1,19 @@
-<div class="uk-product-sidebar uk-box-shadow-small " uk-sticky="end: true;offset: 100;"   style=" z-index: 5;">
-    <ul class="uk-list uk-margin-remove">
+<div class="sidebar-card reveal">
+    <!-- Heading -->
+    <div class="px-7 pt-7 pb-5 border-b border-gray-100">
+        <h3 class="text-2xl font-bold text-primary">
+            Product Categories
+        </h3>
+    </div>
+
+    <!-- Links -->
+    <div>
         @foreach($data_child as $row)
-            <li class="uk-margin-remove">
-                <a href="{{url(geturl($row['uri'],$row['page_key']))}}">
-                    <div class="uk-flex uk-flex-between uk-sidebar-list">
-                        <h3 class="uk-margin-remove">{{$row->post_title}}</h3>
-                        <span uk-icon="chevron-right"></span>
-                    </div>
-                </a>
-            </li>
+            <a href="{{ url(geturl($row['uri'], $row['page_key'])) }}"
+               class="sidebar-link {{ $loop->last ? 'border-b-0' : '' }}">
+                <span>{{ $row->post_title }}</span>
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
         @endforeach
-    </ul>
+    </div>
 </div>

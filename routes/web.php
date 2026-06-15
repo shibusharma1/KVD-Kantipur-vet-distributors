@@ -9,7 +9,20 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::prefix('admin')->middleware('auth')->group(function () {
+
+    // Route::resource('product-categories', ProductCategoryController::class);
+
+    // Route::resource('products', ProductController::class);
+});
+
 Route::get('/', 'FrontendControllers\FrontpageController@index');
+// Route::get('/contactus', 'FrontendControllers\FrontpageController@index')->name('contactus');
+
+/* Products Routes */
+// Route::get('products', 'ProductPageController@index')->name('products');
+// Route::get('products/category/{slug}', 'ProductPageController@category')->name('products.category');
+// Route::get('product/{slug}', 'ProductPageController@show')->name('product.show');
 
 /* Authentication Routes... */
 Route::get('adminisclient', 'Auth\LoginController@showLoginForm')->name('login');
@@ -46,9 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/admin-user', 'AdminControllers\Members\UserController@admin_user');
     Route::get('admin/agent-user', 'AdminControllers\Members\UserController@agent_user');
     Route::get('inquiry/contact_us', 'AdminControllers\AdminMenu\AdminMenuController@contact_inquiry');
-    Route::delete('inquiry/contact_us/{id}','AdminControllers\AdminMenu\AdminMenuController@contact_delete')->name('inquiry.delete');
+    Route::delete('inquiry/contact_us/{id}', 'AdminControllers\AdminMenu\AdminMenuController@contact_delete')->name('inquiry.delete');
     Route::get('inquiry/application', 'AdminControllers\AdminMenu\AdminMenuController@application_inquiry');
-    Route::delete('inquiry/application/{id}','AdminControllers\AdminMenu\AdminMenuController@career_delete')->name('career.delete');
+    Route::delete('inquiry/application/{id}', 'AdminControllers\AdminMenu\AdminMenuController@career_delete')->name('career.delete');
 
     Route::resources([
         'admin/adminmenu' => 'AdminControllers\AdminMenu\AdminMenuController',
@@ -62,8 +75,16 @@ Route::middleware(['auth'])->group(function () {
         'admin/videocategory' => 'AdminControllers\Galleries\VideoGalleryCategoryController',
         'admin/videogallery' => 'AdminControllers\Galleries\VideoGalleryController',
         'admin/settings' => 'AdminControllers\Settings\SettingController',
-        
-    ]);    
+        // Products
+        'admin/products' => 'AdminControllers\Products\ProductController',
+        'admin/products_categories' => 'AdminControllers\Products\ProductCategoryController',
+    ]);
+
+    // Product and it's categories route
+    Route::delete('delete_product_category_banner/{id}', 'AdminControllers\Products\ProductCategoryController@delete_banner');
+    Route::delete('delete_product_category_icon/{id}', 'AdminControllers\Products\ProductCategoryController@delete_icon');
+    Route::delete('delete_product_image/{id}','AdminControllers\Products\ProductController@delete_image');
+
 
     Route::resource('admin.multiplephoto', 'AdminControllers\Posts\PostImageController');
     Route::resource('admin.multiplevideo', 'AdminControllers\Posts\MultipleVideoController');
@@ -108,7 +129,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('adminimg/multiplephoto/{id}', 'AdminControllers\Posts\PostImageController@update')->name('multiplephoto.update');
     Route::delete('adminimg/multiplephoto/{id}', 'AdminControllers\Posts\PostImageController@destroy');
 
-// Associated Post
+    // Associated Post
     Route::get('admin/associated/{type}/{id}', 'AdminControllers\Posts\AssociatedPostController@associated_post')->name('associated.post.index');
     Route::get('admin/associated/{type}/{id}/create', 'AdminControllers\Posts\AssociatedPostController@create')->name('admin.associated.create');
     Route::post('admin/associated/{type}/{id}/store', 'AdminControllers\Posts\AssociatedPostController@store')->name('admin.associated.store');
@@ -116,7 +137,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/associated/{type}/{id}/edit', 'AdminControllers\Posts\AssociatedPostController@edit')->name('admin.associated.edit');
     Route::put('admin/associated/{type}/{id}', 'AdminControllers\Posts\AssociatedPostController@update')->name('admin.associated.update');
 
-  // Upload multiple document
+    // Upload multiple document
     Route::get('doc/multipledocument/{post_id}', 'AdminControllers\Posts\PostDocController@index')->name('doc.multipledocument');
     Route::get('doc/multipledocument/{post_id}/create', 'AdminControllers\Posts\PostDocController@create');
     Route::post('doc/multipledocument/store', 'AdminControllers\Posts\PostDocController@store')->name('multipledocument.store');
@@ -133,6 +154,4 @@ Route::middleware(['auth'])->group(function () {
         $posttype = App\Models\Posts\PostTypeModel::orderBy('ordering', 'asc')->get();
         $view->with('posttype', $posttype);
     });
-
-  
 });

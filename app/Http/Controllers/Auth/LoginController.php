@@ -42,9 +42,9 @@ class LoginController extends Controller
 
      public function login(Request $request)
     {
-        $g_recaptcha_response = $request->input('g_recaptcha_response');
-        $result = $this->getCaptcha($g_recaptcha_response);
-        if($result->success == true && $result->score > 0.6){
+        // $g_recaptcha_response = $request->input('g_recaptcha_response');
+        // $result = $this->getCaptcha($g_recaptcha_response);
+        // if($result->success == true && $result->score > 0.6){
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'pin' => $request->pin])) {
                 if(Auth::user()->suspended){
                     return redirect('account-suspended');
@@ -53,15 +53,15 @@ class LoginController extends Controller
             }else{
                 return redirect()->intended('adminisclient')->with('status', 'Invalid Username, Password or PIN!');
             }
-        }else{
-            return redirect()->intended('adminisclient')->with('status', 'You are Robot!');
-        }
+        // }else{
+        //     return redirect()->intended('adminisclient')->with('status', 'You are Robot!');
+        // }
     }
     
-     private function getCaptcha($secretKey){
-        $secret_key = env('SECRET_KEY');
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response={$secretKey}");
-        $result = json_decode($response);
-        return $result;
-    }
+    //  private function getCaptcha($secretKey){
+    //     $secret_key = env('SECRET_KEY');
+    //     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response={$secretKey}");
+    //     $result = json_decode($response);
+    //     return $result;
+    // }
 }

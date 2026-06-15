@@ -1,48 +1,67 @@
 @if ($paginator->hasPages())
-    <nav aria-label="Pagination">
-        <ul class="uk-pagination uk-flex-center uk-margin-top" uk-margin>
-            
+    <div class="mt-8 flex justify-center reveal">
+        <nav class="flex items-center gap-3" aria-label="Pagination">
+
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <li class="uk-disabled"><span uk-pagination-previous></span></li>
+                <span
+                    class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-gray-400 cursor-not-allowed">
+                    <i class="fa-solid fa-angle-left"></i>
+                </span>
             @else
-                <li>
-                    <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="uk-prev-page">
-                        <span uk-pagination-previous></span>
-                    </a>
-                </li>
+                <a href="{{ $paginator->previousPageUrl() }}"
+                    rel="prev"
+                    class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition duration-300">
+                    <i class="fa-solid fa-angle-left"></i>
+                </a>
             @endif
 
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
+
+                {{-- Three Dots Separator --}}
                 @if (is_string($element))
-                    <li class="uk-disabled"><span>{{ $element }}</span></li>
+                    <span
+                        class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-gray-500">
+                        {{ $element }}
+                    </span>
                 @endif
 
-                {{-- Array of Links --}}
+                {{-- Array Of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
+
                         @if ($page == $paginator->currentPage())
-                            <li class="uk-active"><span aria-current="page">{{ $page }}</span></li>
+                            <span
+                                class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center font-semibold">
+                                {{ $page }}
+                            </span>
                         @else
-                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                            <a href="{{ $url }}"
+                                class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition duration-300">
+                                {{ $page }}
+                            </a>
                         @endif
+
                     @endforeach
                 @endif
+
             @endforeach
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li>
-                    <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="uk-next-page">
-                        <span uk-pagination-next></span>
-                    </a>
-                </li>
+                <a href="{{ $paginator->nextPageUrl() }}"
+                    rel="next"
+                    class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition duration-300">
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
             @else
-                <li class="uk-disabled"><span uk-pagination-next></span></li>
+                <span
+                    class="w-11 h-11 rounded-2xl border border-gray-200 flex items-center justify-center text-gray-400 cursor-not-allowed">
+                    <i class="fa-solid fa-angle-right"></i>
+                </span>
             @endif
 
-        </ul>
-    </nav>
+        </nav>
+    </div>
 @endif
