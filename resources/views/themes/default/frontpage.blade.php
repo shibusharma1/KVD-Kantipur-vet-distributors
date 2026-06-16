@@ -34,7 +34,7 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
 
-                    <a href="contact.php" class="white-btn">
+                    <a href="{{ url('page/contact.html') }}" class="white-btn">
                         Contact Us
                         <i class="fa-solid fa-phone"></i>
                     </a>

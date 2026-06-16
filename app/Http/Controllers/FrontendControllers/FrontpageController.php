@@ -26,6 +26,7 @@ use App\Mail\CareerApply;
 use App\Mail\CareerMail;
 use App\Models\Posts\PostTypeModel;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -106,10 +107,64 @@ class FrontpageController extends Controller
 
   public function product_detail($uri)
   {
-    $product = Product::with(['category','images'])->where('slug', $uri)->where('is_active', 1)->firstOrFail();
-    $relatedProducts = Product::where('cl_product_category_id',$product->cl_product_category_id)->where('id', '!=', $product->id)->where('is_active', 1)->take(4)->get();
-    return view('themes.default.product-detail',compact('product','relatedProducts'));
+    $product = Product::with(['category'])->where('slug', $uri)->where('is_active', 1)->firstOrFail();
+    $relatedProducts = Product::where('cl_product_category_id', $product->cl_product_category_id)->where('id', '!=', $product->id)->where('is_active', 1)->take(4)->get();
+    return view('themes.default.product-detail', compact('product', 'relatedProducts'));
   }
+
+  // public function products(Request $request)
+  // {
+  //   $search = $request->search;
+
+  //   $products = Product::with('category')
+  //     ->where('is_active', 1)
+  //     ->when($search, function ($query) use ($search) {
+  //       $query->where('name', 'LIKE', "%{$search}%");
+  //     })
+  //     ->orderBy('sort_order')
+  //     ->paginate(12);
+
+  //   $categories = ProductCategory::where('is_active', 1)
+  //     ->orderBy('sort_order')
+  //     ->get();
+
+  //   return view(
+  //     'themes.default.template-product',
+  //     compact('products', 'categories', 'search')
+  //   );
+  // }
+  public function products(Request $request)
+  {
+    $search = $request->search;
+    $category = $request->category;
+
+    $products = Product::with('category')
+      ->where('is_active', 1)
+      ->when($category, function ($query) use ($category) {
+        $query->whereHas('category', function ($q) use ($category) {
+          $q->where('slug', $category);
+        });
+      })
+      ->when($search, function ($query) use ($search) {
+        $query->where('name', 'LIKE', "%{$search}%");
+      })->orderBy('sort_order')
+      ->paginate(12);
+
+    $categories = ProductCategory::where('is_active', 1)
+      ->orderBy('sort_order')
+      ->get();
+
+    return view(
+      'themes.default.template-product',
+      compact(
+        'products',
+        'categories',
+        'search',
+        'category'
+      )
+    );
+  }
+
   // public function product_detail($uri)
   // {
   //   $data = AssociatedPostModel::where('uri', $uri)->first();

@@ -32,8 +32,7 @@
         </script>
         <!-- Font Awesome -->
         {{-- <script src="https://kit.fontawesome.com/7254a5967d.js" crossorigin="anonymous"></script> --}}
-        <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
@@ -84,66 +83,13 @@
                             <img src="{{ asset('assets/uploads/img/kantipurvet-logo.png') }}" alt="Kantipur Vet"
                                 class="w-[125px]">
                         </a>
-                        <!-- Navigation -->
-                        {{-- <ul class="flex items-center gap-10">
+                  
+                        <ul class="flex items-center gap-10">
                             <li>
-                                <a href="index.php" class="nav-link">
+                                <a href="{{ url('/') }}" class="nav-link">
                                     Home
                                 </a>
                             </li>
-                            <li class="has-dropdown">
-                                <a href="#" class="nav-link flex items-center gap-2">
-                                    About us
-                                    <i class="fa-solid fa-chevron-down text-[11px]"></i>
-                                </a>
-                                <!-- Dropdown Panel -->
-                                <div class="dropdown-panel">
-                                    <a href="product-list.php">
-                                        Our Story
-                                    </a>
-                                    <a href="product-list.php">
-                                        Our Commitment
-                                    </a>
-                                </div>
-                            </li>
-
-                            <!-- Dropdown -->
-                            <li class="has-dropdown">
-                                <a href="#" class="nav-link flex items-center gap-2">
-                                    Product
-                                    <i class="fa-solid fa-chevron-down text-[11px]"></i>
-                                </a>
-                                <!-- Dropdown Panel -->
-                                <div class="dropdown-panel">
-                                    <a href="product-list.php">
-                                        Feed Supplement
-                                    </a>
-                                    <a href="product-list.php">
-                                        Allopathic
-                                    </a>
-                                    <a href="product-list.php">
-                                        Marketing Division
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link">
-                                    Our Services
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link">
-                                    Gallery
-                                </a>
-                            </li>
-                            <li>
-                                <a href="blog.php" class="nav-link">
-                                    Blogs
-                                </a>
-                            </li>
-
-                        </ul> --}}
-                        <ul class="flex items-center gap-10">
 
                             @foreach ($navigations as $row)
                                 @if ($row->id != 2)
@@ -155,7 +101,7 @@
                                 @else
                                     <!-- Product Dropdown -->
                                     <li class="relative group">
-                                        <a href="#" class="nav-link flex items-center gap-2">
+                                        <a href="{{ url('page/products') }}" class="nav-link flex items-center gap-2">
                                             {{ $row->post_type }}
 
                                             <i
@@ -182,8 +128,9 @@
                         </ul>
                         <div class="flex items-center gap-3">
 
-                            <a href="{{ url('/page/contact') }}">
-                                <button class="bg-primary text-white px-6 py-2 rounded-xl font-semibold flex items-center gap-4 hover:bg-secondary transition duration-300 shadow-md">
+                            <a href="{{ url('page/contact.html') }}">
+                                <button
+                                    class="bg-primary text-white px-6 py-2 rounded-xl font-semibold flex items-center gap-4 hover:bg-secondary transition duration-300 shadow-md">
                                     Contact Us
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
@@ -231,6 +178,9 @@
             </div>
             <!-- Navigation -->
             <nav class="py-2">
+                <a href="{{ url('/') }}" class="offcanvas-nav-link">
+                    Home
+                </a>
 
                 @foreach ($navigations as $row)
                     @if ($row->id != 2)
@@ -268,7 +218,7 @@
             <!-- Social -->
             <div class="px-5 py-6 flex items-center gap-3">
 
-                <a href="{{ url('/page/contact') }}">
+                <a href="{{ url('page/contact.html') }}">
                     <button
                         class="bg-primary text-white px-6 py-2 rounded-xl font-semibold flex items-center gap-4 hover:bg-secondary transition duration-300 shadow-md">
                         Contact Us

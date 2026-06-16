@@ -238,7 +238,7 @@
                                     Contact us for more information.
                                 </p>
 
-                                <a href="{{ url('/contact') }}"
+                                <a href="{{ url('page/contact.html') }}"
                                     class="inline-block mt-6 bg-white text-primary px-6 py-2 rounded-xl font-semibold">
                                     Contact Us
                                 </a>

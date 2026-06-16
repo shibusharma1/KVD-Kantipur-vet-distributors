@@ -58,6 +58,12 @@
                     </h3>
 
                     <ul class="space-y-5">
+                        <li>
+                            <a href="{{ url('/') }}" class="footer-link">
+                                Home
+                            </a>
+                        </li>
+
                         @foreach ($navigations as $row)
                             <li><a href="{{ url('page/' . posttype_url($row->uri)) }}"
                                     class="footer-link">{{ $row->post_type }}</a></li>
@@ -72,7 +78,6 @@
                     </h3>
 
                     <ul class="space-y-5">
-
                         @foreach ($products as $row)
                             <li><a href="{{ url(geturl($row['uri'], $row['page_key'])) }}"
                                     class="footer-link">{{ $row->post_title }}</a></li>

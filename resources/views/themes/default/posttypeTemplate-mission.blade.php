@@ -201,7 +201,7 @@
         </p>
         <!-- Buttons -->
         <div class="flex flex-wrap justify-center gap-4 mt-10 reveal">
-            <a href="contact.php" class="white-btn">
+            <a href="{{ url('page/contact.html') }}" class="white-btn">
                 Contact Us
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
