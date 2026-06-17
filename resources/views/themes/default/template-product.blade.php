@@ -63,13 +63,10 @@
                             </div> --}}
                             <div>
                                 @foreach ($categories as $category)
-                                    <a href="{{ url('products?category=' . $category->slug) }}"
-                                        class="sidebar-link {{ $loop->last ? 'border-b-0' : '' }}">
-
+                                    <a href="{{ url('page/products?category=' . $category->slug) }}"
+                                        class="sidebar-link {{ request('category') == $category->slug ? 'active' : '' }} {{ $loop->last ? 'border-b-0' : '' }}">
                                         <span>{{ $category->name }}</span>
-
                                         <i class="fa-solid fa-angle-right"></i>
-
                                     </a>
                                 @endforeach
                             </div>

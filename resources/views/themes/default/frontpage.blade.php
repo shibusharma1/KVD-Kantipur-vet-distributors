@@ -29,7 +29,7 @@
 
                 <!-- Buttons -->
                 <div class="flex flex-wrap items-center gap-4 mt-10 reveal">
-                    <a href="about.php" class="primary-btn">
+                    <a href="{{ url('/page/about.html') }}" class="primary-btn">
                         Explore More
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
@@ -45,8 +45,8 @@
     </section>
 
     <!-- =========================================
-    OUR STORY SECTION
-    ========================================= -->
+        OUR STORY SECTION
+        ========================================= -->
     <section>
         <!-- Background Soft Shape -->
         <div
@@ -176,7 +176,7 @@
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 mb-8">
                 <div>
                     <p class="section-tag reveal">
-                        Our Products
+                        Our Products Categories
                     </p>
                     <h2 class="mt-4 text-3xl md:text-5xl font-bold leading-tight text-primary reveal">
                         Veterinary Healthcare Solutions
@@ -188,7 +188,7 @@
                 </div>
                 <!-- BUTTON -->
                 <div class="reveal flex-shrink-0">
-                    <a href="#" class="primary-btn">
+                    <a href="{{ url('page/products') }}" class="primary-btn">
                         View All Products
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
@@ -196,15 +196,16 @@
             </div>
             <!-- Product Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-                @foreach ($products as $product)
-                <a href="{{ route('page.product_detail', $product->slug) }}" class="product-card reveal group">
+                @foreach ($productcategories as $category)
+                    <a href="{{ url('page/products?category=' . $category->slug) }}" class="product-card reveal group">
                         <div class="product-card-image">
-                            <img src="{{ asset('uploads/products/' . $product->featured_image) }}" alt="Product">
+                            <img src="{{ asset('uploads/product-category/banner/' . $category->banner_image) }}"
+                                alt="Product">
                         </div>
 
                         <div class="product-card-content">
                             <h3 class="text-sm md:text-base font-semibold text-primary">
-                                {{ $product->name }}
+                                {{ $category->name }}
                             </h3>
                         </div>
                     </a>
@@ -214,12 +215,11 @@
     </section>
 
     <!-- =========================================
-       MESSAGE FROM MD SECTION
-       ========================================= -->
+           MESSAGE FROM MD SECTION
+           ========================================= -->
     <section>
         <!-- Background Shape -->
-        <div
-            class="absolute left-[-120px] top-20 w-[320px] h-[320px] bg-[var(--color-secondary)]/10 rounded-full blur-3xl">
+        <div class="absolute left-[-120px] top-20 w-[320px] h-[320px] bg-[var(--color-secondary)]/10 rounded-full blur-3xl">
         </div>
         <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
             <!-- SECTION HEADER -->
@@ -254,7 +254,7 @@
                                         Managing Director
                                     </h4>
                                     <p class="text-white/70 text-sm mt-1">
-                                        Kantipur Vet Distributors Pvt. Ltd.
+                                        {{ $setting->site_name }}
                                     </p>
                                 </div>
                             </div>
@@ -305,8 +305,6 @@
                             Nepal's most reliable partner in animal health. We have expanded our reach and strengthened our
                             partnerships with global manufacturers to ensure Nepal's farmers receive world-class veterinary
                             solutions.
-                            <!-- </p>
-                        <p class="text-[16px] leading-9"> -->
                             Today, with over 3,000 products, 40+ global partners, and a dedicated team of professionals, we
                             continue to move forward with innovation, integrity, and commitment toward Nepal’s agricultural
                             prosperity.
@@ -319,7 +317,7 @@
                                 Managing Director
                             </h5>
                             <p class="mt-1 text-sm font-semibold tracking-wide uppercase text-gray-500">
-                                Kantipur Vet Distributors Pvt. Ltd.
+                                {{ $setting->site_name }}
                             </p>
                         </div>
                     </div>
@@ -329,8 +327,8 @@
     </section>
 
     <!-- =========================================
-       GALLERY & CORPORATE VIDEOS SECTION
-       ========================================= -->
+           GALLERY & CORPORATE VIDEOS SECTION
+           ========================================= -->
     <section id="gallery">
         <!-- Background Glow -->
         <div class="absolute top-0 left-0 w-[420px] h-[420px] bg-[var(--color-primary)]/20 rounded-full blur-3xl"></div>
@@ -484,8 +482,8 @@
     </section>
 
     <!-- =========================================
-       SERVICES SECTION
-       ========================================= -->
+           SERVICES SECTION
+           ========================================= -->
     <section id="services" style="overflow: visible !important;">
         <!-- BACKGROUND SHAPES -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -623,8 +621,8 @@
     </section>
 
     <!-- =========================================
-       GLOBAL PARTNERS SECTION
-       ========================================= -->
+           GLOBAL PARTNERS SECTION
+           ========================================= -->
     <section id="partners">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -759,8 +757,8 @@
     </section>
 
     <!-- =========================================
-       NUMBERS / STATS SECTION
-       ========================================= -->
+           NUMBERS / STATS SECTION
+           ========================================= -->
     <section id="numbers" style="background-color: white;">
         <!-- BACKGROUND -->
         <div class="absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-white),#f8fafc)]"></div>
@@ -881,8 +879,8 @@
     </section>
 
     <!-- =========================================
-       SERVING ALL OF NEPAL
-       ========================================= -->
+           SERVING ALL OF NEPAL
+           ========================================= -->
     <section id="coverage">
         <!-- BACKGROUND -->
         <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1072,8 +1070,8 @@
     </section>
 
     <!-- =========================================
-       LATEST NEWS & ANNOUNCEMENTS
-       ========================================= -->
+           LATEST NEWS & ANNOUNCEMENTS
+           ========================================= -->
     <section id="news">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1216,7 +1214,7 @@
     </section>
 
     <!-- ========================= CONTACT SECTION ========================= -->
-    <section>
+    {{-- <section>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
                 <!-- ========================= LEFT CONTENT ========================= -->
@@ -1308,7 +1306,8 @@
                             </h3>
                         </div>
                         <!-- Form -->
-                        <form action="#" method="POST">
+                        <form action="{{ route('sendmail_contact') }}" method="POST">
+                            @csrf
                             <!-- Grid -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Name -->
@@ -1364,11 +1363,167 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
+    <section class="py-12 md:py-12 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
+                <!-- ========================= LEFT CONTENT ========================= -->
+                <div class="lg:col-span-5 pt-8">
+                    <p class="section-tag reveal">
+                        Get In Touch
+                    </p>
+                    <h2 class="mt-5 text-3xl md:text-4xl font-bold leading-tight text-primary reveal">
+                        We’d Love To Hear From You.
+                        {{-- {!! $data->caption !!} --}}
+                    </h2>
+                    <p class="mt-5 text-gray-600 leading-8 reveal">
+                        Contact Kantipur Pharmaceuticals Lab Limited for veterinary healthcare products, technical support,
+                        product inquiries and partnership opportunities across Nepal.
+                        {{-- {!! $data->content !!} --}}
+                    </p>
+                    <!-- Contact Cards -->
+                    <div class="space-y-2 mt-8">
+                        <!-- Office -->
+                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                            <div
+                                class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">
+                                    Corporate Office
+                                </h4>
+                                <p class="mt-2 text-gray-500 leading-8">
+                                    {{-- Balkumari, Lalitpur, Nepal --}}
+                                    {{ $setting->address }}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Factory -->
+                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                            <div
+                                class="w-16 h-16 rounded-3xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-industry text-secondary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">
+                                    Factory Address
+                                </h4>
+                                <p class="mt-2 text-gray-500 leading-8">
+                                    {{-- Hokshe, Kavre --}}
+                                    {{ $setting->address2 }}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Phone -->
+                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                            <div
+                                class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-primary">
+                                    Phone Number
+                                </h4>
+                                <p class="mt-2 text-gray-500 leading-8">
+                                    {{-- +977-01-5186604 --}}
+                                    {{ $setting->phone }}
+                                </p>
+
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                            <div
+                                class="w-16 h-16 rounded-3xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-envelope text-secondary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-primary">
+                                    Email Address
+                                </h4>
+                                <p class="mt-2 text-gray-500 leading-8 break-all">
+                                    {{-- info@kantipurpharma.com --}}
+                                    {{ $setting->email_primary }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================= FORM ========================= -->
+                <div class="lg:col-span-7">
+                    <div class="modern-card p-8 md:p-12 reveal">
+                        <div class="mb-10">
+                            <p class="section-tag">
+                                Send Message
+                            </p>
+                            <h3 class="mt-5 text-3xl md:text-4xl font-bold text-primary">
+                                Contact Form
+                            </h3>
+                        </div>
+                        <!-- Form -->
+                        <form action="{{ route('sendmail_contact') }}" method="POST">
+                            @csrf
+                            <!-- Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Name -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-primary mb-3">
+                                        Full Name
+                                    </label>
+                                    <input type="text" placeholder="Enter your name" name="fullname"
+                                        class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
+                                </div>
+                                <!-- Email -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-primary mb-3">
+                                        Email Address
+                                    </label>
+                                    <input type="email" placeholder="Enter your email" name="email"
+                                        class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
+                                </div>
+                                <!-- Phone -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-primary mb-3">
+                                        Phone Number
+                                    </label>
+                                    <input type="text" placeholder="Enter your phone" name="phone"
+                                        class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
+                                </div>
+                                <!-- Subject -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-primary mb-3">
+                                        Subject
+                                    </label>
+                                    <input type="text" placeholder="Enter subject" name="subject"
+                                        class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
+                                </div>
+                            </div>
+                            <!-- Message -->
+                            <div class="mt-6">
+                                <label class="block text-sm font-semibold text-primary mb-3">
+                                    Message
+                                </label>
+                                <textarea rows="5" placeholder="Write your message..." name="message"
+                                    class="w-full rounded-[28px] border border-gray-200 bg-gray-50 px-5 py-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300 resize-none"></textarea>
+                            </div>
+                            <!-- Button -->
+                            <div class="mt-8">
+                                <button type="submit" class="primary-btn border-0 cursor-pointer">
+                                    Send Message
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- =========================================
-       VIDEO MODAL
-       ========================================= -->
+           VIDEO MODAL
+           ========================================= -->
     <div id="videoModal"
         class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-5">
         <!-- CLOSE -->

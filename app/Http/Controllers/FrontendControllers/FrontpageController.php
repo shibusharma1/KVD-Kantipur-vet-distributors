@@ -44,17 +44,19 @@ class FrontpageController extends Controller
     $blog = PostTypeModel::where('id', '3')->first();
     $blogs = PostModel::where('post_type', '3')->orderBy('post_order', 'asc')->take(5)->get();
     $frontpageData = PostTypeModel::where('id', '10')->first();
-    $products = Product::with('category')->where('show_in_home', 1)->where('is_active', 1)->latest()->take(4)->get();
+    $productcategories = ProductCategory::where('show_in_home', 1)->where('is_active', 1)->latest()->take(4)->get();
     // $commitment = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '28'])->with('images')->first();
     // $research = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '29'])->with('associatePosts')->first();
     // $strength = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '30'])->first();
     // $team = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '31'])->first();
     // dd($frontpageData, $commitment , $strength,$research,$team);
-    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'products'));
+    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories'));
   }
 
   public function posttype($uri)
   {
+
+
     if (!check_posttype_uri($uri)) {
       abort(404);
     }
@@ -67,6 +69,8 @@ class FrontpageController extends Controller
     if ($data) {
       $posts = PostModel::where('post_type', $data->id)->with('associatePosts')->orderBy('post_order', 'asc')->paginate(6);
     }
+
+    // dd($posts);
 
     $documents = PostDocModel::where('post_id', $data['id'])->orderBy('ordering', 'desc')->get();
     // dd($data,$posts,$setting);
@@ -100,9 +104,10 @@ class FrontpageController extends Controller
     }
     $related_posts = PostModel::where('post_type', $data->post_type)->where('id', '!=', $data['id'])->orderBy('id', 'asc')->get();
     $multiphotos = $data->images()->orderBy('created_at', 'desc')->paginate(6);
+    $recent_blogs = PostModel::where('post_type', $data->post_type)->where('id', '!=', $data->id)->latest('created_at')->take(5)->get();
     // dd( $data,$data_child,$related_posts);
-
-    return view('themes.default.' . $data['template'] . '', compact('data', 'data_child', 'associated_posts', 'documents', 'pos_type', 'related_posts', 'multiphotos'));
+  
+    return view('themes.default.' . $data['template'] . '', compact('data', 'data_child', 'associated_posts', 'documents', 'pos_type', 'related_posts', 'multiphotos','recent_blogs'));
   }
 
   public function product_detail($uri)
@@ -273,51 +278,53 @@ class FrontpageController extends Controller
   public function sendmail_contact(Request $request)
   {
     // dd($request->all());
-    $g_recaptcha_response = $request->input('g_recaptcha_response');
-    $result = $this->getCaptcha($g_recaptcha_response);
-    if ($result->success == true) {
-      try {
-        $request->validate([
-          'fname' => 'required|string|max:255',
-          'lname' => 'required|string|max:255',
-          'phone' => 'required|string|max:255',
-          'email' => 'required|email',
-          'message' => 'nullable|string|max:255',
-        ]);
+    // $g_recaptcha_response = $request->input('g_recaptcha_response');
+    // $result = $this->getCaptcha($g_recaptcha_response);
+    // if ($result->success == true) {
+    try {
+      $request->validate([
+        'fullname' => 'required|string|max:255',
+        // 'lname' => 'required|string|max:255',
+        'phone' => 'required|string|max:255',
+        'subject' => 'required|string|max:255',
+        'email' => 'required|email|unique:cl_inquiry,email',
+        'message' => 'nullable|string|max:255',
+      ]);
 
-        if ($request->isMethod('post')) {
-          ContactModel::create([
-            'full_name' => $request->fname,
-            'email' => $request->email,
-            'number' => $request->phone,
-            'subject' => $request->subject,
-            'message' => $request->message,
-            'country' => $request->lname,
-          ]);
-          return new ContactMail();
-          // Mail::to($request->email)->send(new ContactMail());
-          $name = $request->fname . ' ' . $request->lname;
-          $message = "<p>Thank you for contacting us. One of our team will be in touch with you soon.</p>";
-          return view('themes.default.inquiry-success', compact('message', 'name'));
-        }
-      } catch (ValidationException $e) {
-        return redirect()->back()->with([
-          'error' => true,
-          'message' => $e->validator->errors()->all()
+      if ($request->isMethod('post')) {
+        ContactModel::create([
+          'full_name' => $request->fullname,
+          'email' => $request->email,
+          'number' => $request->phone,
+          'subject' => $request->subject,
+          'message' => $request->message,
+          // 'country' => $request->lname,
         ]);
-      } catch (Exception $e) {
-        return redirect()->back()->with([
-          'error' => true,
-          'message' => app()->isLocal() ? $e->getMessage() : 'Something went wrong. Please try again.'
-        ]);
+        // return new ContactMail();
+        // Mail::to($request->email)->send(new ContactMail());
+        $name = $request->fullname;
+        $message = "<p>Thank you for contacting us. One of our team will be in touch with you soon.</p>";
+        return view('themes.default.inquiry-success', compact('message', 'name'));
       }
-    } else {
+    } catch (ValidationException $e) {
       return redirect()->back()->with([
         'error' => true,
-        'message' => 'You are Robot.'
+        'message' => $e->validator->errors()->all()
+      ]);
+    } catch (Exception $e) {
+      return redirect()->back()->with([
+        'error' => true,
+        'message' => app()->isLocal() ? $e->getMessage() : 'Something went wrong. Please try again.'
       ]);
     }
   }
+  //  else {
+  //   return redirect()->back()->with([
+  //     'error' => true,
+  //     'message' => 'You are Robot.'
+  //   ]);
+  // }
+  // }
   public function sendmail_resume(Request $request)
   {
     // dd('test',$request->all());

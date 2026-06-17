@@ -1,40 +1,48 @@
 @extends('themes.default.common.master')
-
 @section('content')
-<!-- start section -->
-<section class="uk-section uk-booking bg-white uk-position-relative" style="background: #f2f2f2;">
-    <div class="uk-container uk-container-small"
-         uk-scrollspy="target:[uk-scrollspy-class], img, h1, h2, h3, h4, h5, h6, hr, .uk-button, li, p; cls: uk-animation-slide-top-small; delay: 50; repeat: false;"
-         style="padding-top: 4rem; padding-bottom: 4rem;">
-        
-        <div class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-medium uk-text-center" style="background: #fff;">
-            <div class="uk-margin-bottom">
-                <span class="uk-icon-button uk-button-success" uk-icon="icon: check; ratio: 2"></span>
-            </div>
+<section class="bg-gray-50 py-20 md:py-28">
+   ```
+   <div class="max-w-3xl mx-auto px-5">
+      <div class="modern-card text-center p-8 md:p-12 reveal">
+         <!-- Success Icon -->
+         <div
+            class="mx-auto w-24 h-24 rounded-full bg-green-100 flex items-center justify-center">
+            <i class="fa-solid fa-check text-4xl text-green-600"></i>
+         </div>
+         <!-- Heading -->
+         <h1 class="mt-8 text-3xl md:text-4xl font-bold text-primary">
+            Message Sent Successfully
+         </h1>
+         <!-- User Name -->
+         <p class="mt-6 text-lg text-gray-600">
+            Dear
+            <span class="font-bold text-primary">
+            {{ $name }}
+            </span>,
+         </p>
+         <!-- Message -->
+         <div class="mt-6 text-gray-600 leading-8 max-w-2xl mx-auto">
+            {!! $message !!}
+         </div>
 
-            <h2 class="uk-text-bold uk-text-success uk-margin-small-bottom">Sent Successfully!</h2>
-
-            <p class="uk-text-lead uk-margin-remove-top">
-                Dear <b>{{ $name }}</b>,
+         <div class="mt-8">
+            <p class="text-gray-500">
+               Best Wishes
             </p>
+            <h3 class="mt-2 text-xl font-bold text-primary">
+               {{ $setting->site_name }}
+            </h3>
+         </div>
+         <!-- Buttons -->
+         <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="{{ url('/') }}"
+               class="primary-btn">
+            Back To Home
+            <i class="fa-solid fa-arrow-right"></i>
+            </a>
+         </div>
+      </div>
+   </div>
 
-            <p class="uk-margin-small-top">
-                {!! $message !!}
-            </p>
-
-            <hr class="uk-divider-icon">
-
-            <p class="uk-text-muted">
-                <b>Best Wishes</b><br>
-                {{ $setting->site_name }}
-            </p>
-
-            <div class="uk-margin-top">
-                <a href="{{ url('/') }}" class="uk-button uk-button-primary uk-border-rounded">Return to Home</a>
-            </div>
-        </div>
-
-    </div>
 </section>
-<!-- end section -->
-@stop
+@endsection

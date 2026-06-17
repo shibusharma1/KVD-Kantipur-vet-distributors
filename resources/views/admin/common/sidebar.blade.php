@@ -149,26 +149,51 @@
 
 
             @if (checkAuth(9))
-                <li class="">
-                    <a class="accordion-toggle">
-                        <span class="glyphicon glyphicon-shopping-cart text-info"></span>
-                        <span class="sidebar-title"> Manage Products </span>
-                        <span class="caret"></span>
+                <li>
+
+                    @if (Request::segment(2) == 'products' ||
+                            Request::segment(2) == 'products-categories' ||
+                            Request::segment(3) == 'products' ||
+                            Request::segment(3) == 'products-categories')
+                        <a class="accordion-toggle menu-open">
+                        @else
+                            <a class="accordion-toggle">
+                    @endif
+
+                    <span class="glyphicon glyphicon-shopping-cart text-info"></span>
+                    <span class="sidebar-title"> Manage Products </span>
+                    <span class="caret"></span>
+
                     </a>
+
                     <ul class="nav sub-nav">
-                        <li>
+
+                        <li class="{{ Request::segment(2) == 'products' ? 'active' : '' }}">
+
                             <a href="{{ route('products.index') }}">
-                                <span class="fa fa fa-arrows-h"></span>
+
+                                <span class="fa fa-arrows-h"></span>
+
                                 Products
+
                             </a>
+
                         </li>
-                        <li>
+
+                        <li class="{{ Request::segment(2) == 'products-categories' ? 'active' : '' }}">
+
                             <a href="{{ route('products_categories.index') }}">
-                                <span class="fa fa fa-arrows-h"></span>
+
+                                <span class="fa fa-arrows-h"></span>
+
                                 Product Categories
+
                             </a>
+
                         </li>
+
                     </ul>
+
                 </li>
             @endif
 

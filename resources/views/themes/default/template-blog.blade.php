@@ -24,14 +24,14 @@
 
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
             <p class="text-white/80 uppercase tracking-[0.25em] text-sm reveal">
-                    @foreach ($breadcrumbs as $crumb)
+                @foreach ($breadcrumbs as $crumb)
                     @if ($crumb['url'])
                         <a href="{{ $crumb['url'] }}" class="hover:text-primary">
                             {{ $crumb['label'] }}
                         </a>
                     @else
                         {{-- <span class="font-semibold text-white"> --}}
-                            {{ $crumb['label'] }}
+                        {{ $crumb['label'] }}
                         {{-- </span> --}}
                     @endif
 
@@ -158,7 +158,7 @@
 
                 <!-- ========================= SIDEBAR ========================= -->
                 <aside class="lg:col-span-4">
-                    <div class="sticky top-28 space-y-8">
+                    <div class="sticky space-y-8">
 
                         <!-- Search -->
                         <div class="p-6 border rounded-2xl">
@@ -174,7 +174,7 @@
                         </div>
 
                         <!-- Categories -->
-                        <div class="border rounded-2xl overflow-hidden">
+                        {{-- <div class="border rounded-2xl overflow-hidden">
                             <div class="p-5 border-b">
                                 <h3 class="text-2xl font-bold text-primary">Categories</h3>
                             </div>
@@ -190,7 +190,7 @@
                                     Feed Supplements <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Recent Posts -->
                         <div class="border rounded-2xl p-6">
@@ -198,27 +198,33 @@
 
                             <div class="space-y-6 mt-6">
 
-                                <a href="#" class="flex gap-4 group">
-                                    <img src="{{ asset('themes-assets/img/blog2.webp') }}"
-                                        class="w-[90px] h-[80px] object-cover rounded-xl group-hover:scale-105 transition">
-                                    <div>
-                                        <p class="text-xs text-gray-400">27 August, 2025</p>
-                                        <h4 class="text-sm font-semibold group-hover:text-secondary">
-                                            Advancing Animal Health
-                                        </h4>
-                                    </div>
-                                </a>
+                                @forelse($recent_blogs as $post)
+                                    <a href="{{ url(geturl($post->uri, $post->page_key)) }}" class="flex gap-4 group">
 
-                                <a href="#" class="flex gap-4 group">
-                                    <img src="{{ asset('themes-assets/img/blog3.jpeg') }}"
-                                        class="w-[90px] h-[80px] object-cover rounded-xl group-hover:scale-105 transition">
-                                    <div>
-                                        <p class="text-xs text-gray-400">27 August, 2025</p>
-                                        <h4 class="text-sm font-semibold group-hover:text-secondary">
-                                            Safe Livestock Solutions
-                                        </h4>
-                                    </div>
-                                </a>
+                                        <img src="{{ $post->page_thumbnail
+                                            ? asset('uploads/medium/' . $post->page_thumbnail)
+                                            : asset('themes-assets/img/blog1.png') }}"
+                                            alt="{{ $post->post_title }}"
+                                            class="w-[90px] h-[80px] object-cover rounded-xl group-hover:scale-105 transition">
+
+                                        <div>
+                                            <p class="text-xs text-gray-400">
+                                                {{ $post->created_at->format('d F, Y') }}
+                                            </p>
+
+                                            <h4 class="text-sm font-semibold group-hover:text-secondary">
+                                                {{ Str::limit($post->post_title, 50) }}
+                                            </h4>
+                                        </div>
+
+                                    </a>
+
+                                @empty
+
+                                    <p class="text-gray-500 text-sm">
+                                        No recent posts found.
+                                    </p>
+                                @endforelse
 
                             </div>
                         </div>

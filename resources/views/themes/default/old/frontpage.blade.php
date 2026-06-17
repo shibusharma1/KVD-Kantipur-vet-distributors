@@ -115,7 +115,7 @@
 								<p>{{$loop->iteration}}</p>
 							</div>
 							<div class="services-text ml-4">
-								<a href="services-inner.php">
+								<a href="#">
 									<h3>{{$row->post_title}}</h3>
 								</a>
 								</a>

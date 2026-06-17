@@ -19,6 +19,7 @@ class ImageGalleryController extends Controller
      */
     public function index()
     {
+        // dd("hi");
         $data = ImageGalleryModel::orderBy('id','desc')->get();
         return view('admin.image-gallery.index', compact('data'));
     }

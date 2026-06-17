@@ -121,6 +121,7 @@
                         </div>
                         <!-- Form -->
                         <form action="{{ route('sendmail_contact') }}" method="POST">
+                            @csrf
                             <!-- Grid -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Name -->
@@ -128,7 +129,7 @@
                                     <label class="block text-sm font-semibold text-primary mb-3">
                                         Full Name
                                     </label>
-                                    <input type="text" placeholder="Enter your name"
+                                    <input type="text" placeholder="Enter your name" name="fullname"
                                         class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
                                 </div>
                                 <!-- Email -->
@@ -136,7 +137,7 @@
                                     <label class="block text-sm font-semibold text-primary mb-3">
                                         Email Address
                                     </label>
-                                    <input type="email" placeholder="Enter your email"
+                                    <input type="email" placeholder="Enter your email" name="email"
                                         class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
                                 </div>
                                 <!-- Phone -->
@@ -144,7 +145,7 @@
                                     <label class="block text-sm font-semibold text-primary mb-3">
                                         Phone Number
                                     </label>
-                                    <input type="text" placeholder="Enter your phone"
+                                    <input type="text" placeholder="Enter your phone" name="phone"
                                         class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
                                 </div>
                                 <!-- Subject -->
@@ -152,7 +153,7 @@
                                     <label class="block text-sm font-semibold text-primary mb-3">
                                         Subject
                                     </label>
-                                    <input type="text" placeholder="Enter subject"
+                                    <input type="text" placeholder="Enter subject" name="subject"
                                         class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
                                 </div>
                             </div>
@@ -161,7 +162,7 @@
                                 <label class="block text-sm font-semibold text-primary mb-3">
                                     Message
                                 </label>
-                                <textarea rows="5" placeholder="Write your message..."
+                                <textarea rows="5" placeholder="Write your message..." name="message"
                                     class="w-full rounded-[28px] border border-gray-200 bg-gray-50 px-5 py-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300 resize-none"></textarea>
                             </div>
                             <!-- Button -->
@@ -191,11 +192,6 @@
             </div>
             <!-- Map -->
             <div class="overflow-hidden rounded-[28px] shadow-2xl reveal">
-                {{-- <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5587.017491661533!2d85.627995!3d27.641364!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eba7e5da251f8b%3A0x94616c285a8191b6!2sKantipur%20Pharmaceuticals%20Lab%20Pvt.%20Ltd.!5e1!3m2!1sen!2snp!4v1758607652267!5m2!1sen!2snp"
-                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe> --}}
                 {!! $setting->google_map !!}
             </div>
         </div>

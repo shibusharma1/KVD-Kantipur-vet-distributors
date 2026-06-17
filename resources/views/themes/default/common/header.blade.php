@@ -104,13 +104,13 @@
                                         <a href="{{ url('page/products') }}" class="nav-link flex items-center gap-2">
                                             {{ $row->post_type }}
 
-                                            <i
+                                            {{-- <i
                                                 class="fa-solid fa-chevron-down text-[11px] transition-transform duration-300 group-hover:rotate-180">
-                                            </i>
+                                            </i> --}}
                                         </a>
 
                                         <!-- Dropdown Panel -->
-                                        <div
+                                        {{-- <div
                                             class="absolute left-0 top-full z-50 hidden min-w-[250px] rounded-lg bg-white py-2 shadow-xl group-hover:block">
 
                                             @foreach ($services as $service)
@@ -120,7 +120,7 @@
                                                 </a>
                                             @endforeach
 
-                                        </div>
+                                        </div> --}}
                                     </li>
                                 @endif
                             @endforeach
@@ -146,7 +146,7 @@
                 <div class="max-w-7xl mx-auto px-4">
                     <nav class="flex items-center justify-between py-4">
                         <!-- Logo -->
-                        <a href="index.php">
+                        <a href="{{ url('/') }}">
                             <img src="{{ asset('assets/uploads/img/kantipurvet-logo.png') }}" alt="Logo"
                                 class="w-[115px]">
                         </a>

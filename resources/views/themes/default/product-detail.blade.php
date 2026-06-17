@@ -159,13 +159,6 @@
                             </div>
                         </div>
                     @endif
-                    <!-- CTA -->
-                    {{-- <div class="mt-8 reveal">
-                        <a href="contact.php" class="primary-btn">
-                            Contact For Inquiry
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div> --}}
                     @if ($product->external_link)
                         <a href="{{ $product->external_link }}" target="_blank" class="primary-btn mt-8">
                             Buy Now
@@ -195,55 +188,13 @@
                     </h2>
                 </div>
                 <div class="reveal">
-                    <a href="product-list.php" class="primary-btn">
+                    <a href="{{ url('/page/products') }}" class="primary-btn">
                         View All Products
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <!-- Product Grid -->
-            {{-- <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-                <a href="product-detail.php" class="product-card reveal group">
-                    <div class="product-card-image">
-                        <img src="assets/img/product/1.png" alt="Product">
-                    </div>
-                    <div class="product-card-content">
-                        <h3 class="text-sm md:text-base font-semibold text-primary">
-                            Clearcal-P-Oral
-                        </h3>
-                    </div>
-                </a>
-                <a href="product-detail.php" class="product-card reveal group">
-                    <div class="product-card-image">
-                        <img src="assets/img/product/1.png" alt="Product">
-                    </div>
-                    <div class="product-card-content">
-                        <h3 class="text-sm md:text-base font-semibold text-primary">
-                            Poultry Supplement
-                        </h3>
-                    </div>
-                </a>
-                <a href="product-detail.php" class="product-card reveal group">
-                    <div class="product-card-image">
-                        <img src="assets/img/product/1.png" alt="Product">
-                    </div>
-                    <div class="product-card-content">
-                        <h3 class="text-sm md:text-base font-semibold text-primary">
-                            Animal Care
-                        </h3>
-                    </div>
-                </a>
-                <a href="product-detail.php" class="product-card reveal group">
-                    <div class="product-card-image">
-                        <img src="assets/img/product/1.png" alt="Product">
-                    </div>
-                    <div class="product-card-content">
-                        <h3 class="text-sm md:text-base font-semibold text-primary">
-                            Livestock Formula
-                        </h3>
-                    </div>
-                </a>
-            </div> --}}
+
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach ($relatedProducts as $related)
                     <a href="{{ route('page.product_detail', $related->slug) }}" class="product-card reveal group">

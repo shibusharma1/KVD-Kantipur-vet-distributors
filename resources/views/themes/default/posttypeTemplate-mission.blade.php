@@ -205,7 +205,7 @@
                 Contact Us
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <a href="product-list.php" class="primary-btn bg-secondary hover:bg-white hover:text-primary">
+            <a href="{{ url('/page/products') }}" class="primary-btn bg-secondary hover:bg-white hover:text-primary">
                 Explore Products
                 <i class="fa-solid fa-box-open"></i>
             </a>

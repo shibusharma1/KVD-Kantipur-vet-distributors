@@ -13,7 +13,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-14">
                 <!-- ========================= Company ========================= -->
                 <div class="reveal">
-                    <a href="index.php" class="inline-block">
+                    <a href="{{ url('/') }}" class="inline-block">
                         <img src="{{ asset('assets/uploads/img/kantipurvet-logo.png') }}" alt="Logo"
                             class="w-[130px] bg-white p-2 rounded-xl">
                     </a>
@@ -74,13 +74,13 @@
                 <!-- ========================= Products ========================= -->
                 <div class="reveal">
                     <h3 class="text-white text-xl font-semibold mb-8">
-                        Our Products
+                        Our Products Categories
                     </h3>
 
                     <ul class="space-y-5">
-                        @foreach ($products as $row)
-                            <li><a href="{{ url(geturl($row['uri'], $row['page_key'])) }}"
-                                    class="footer-link">{{ $row->post_title }}</a></li>
+                        @foreach ($categories as $category)
+                            <li><a href="{{ url('page/products?category=' . $category->slug) }}"
+                                    class="footer-link">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
 
@@ -179,12 +179,12 @@
             <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
                 <!-- Left -->
                 <div class="flex items-center gap-6 text-center lg:text-left">
-                    <a href="terms-and-conditions.php"
+                    <a href="{{ url('/page/terms-and-conditions.html') }}"
                         class="text-white/60 text-sm hover:text-white transition duration-300">
                         Terms & Conditions
                     </a>
 
-                    <a href="privacy-policy.php" class="text-white/60 text-sm hover:text-white transition duration-300">
+                    <a href="{{ url('/page/privacy-policy.html') }}" class="text-white/60 text-sm hover:text-white transition duration-300">
                         Privacy Policy
                     </a>
                 </div>

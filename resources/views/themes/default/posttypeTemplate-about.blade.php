@@ -173,7 +173,7 @@
                     Contact Us
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
-                <a href="product-list.php" class="white-btn border border-gray-200">
+                <a href="{{ url('/page/products') }}" class="white-btn border border-gray-200">
                     View Products
                     <i class="fa-solid fa-box-open"></i>
                 </a>
