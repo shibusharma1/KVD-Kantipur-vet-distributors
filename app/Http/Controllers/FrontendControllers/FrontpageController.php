@@ -46,17 +46,22 @@ class FrontpageController extends Controller
     $frontpageData = PostTypeModel::where('id', '10')->first();
     $productcategories = ProductCategory::where('show_in_home', 1)->where('is_active', 1)->latest()->take(4)->get();
     $videos = PostModel::where('post_type', '15')->orderBy('post_order', 'asc')->latest()->take(5)->get();
-    // $commitment = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '28'])->with('images')->first();
-    // $research = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '29'])->with('associatePosts')->first();
-    // $strength = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '30'])->first();
-    // $team = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '31'])->first();
-    // dd($frontpageData, $commitment , $strength,$research,$team);
-    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories','videos'));
+    $service  = PostTypeModel::where('id', '11')->first();
+    $services = PostModel::where('post_type', '11')->orderBy('post_order', 'asc')->latest()->take(6)->get();
+    $story = PostTypeModel::where('id', '16')->first();
+    $stories = PostModel::where('post_type', '16')->orderBy('post_order', 'asc')->first();
+    $leader = PostTypeModel::where('id', '17')->first();
+    $leadermessage = PostModel::where('post_type', '17')->orderBy('post_order', 'asc')->first();
+    $keypartner = PostTypeModel::where('id', '19')->first();
+    $keypartnercard = PostModel::where('post_type', '19')->orderBy('post_order', 'asc')->latest()->get();
+    $network = PostTypeModel::where('id', '20')->first();
+    $networkcard = PostModel::where('post_type', '20')->orderBy('post_order', 'asc')->latest()->take(4)->get();
+
+    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories', 'videos', 'services', 'service', 'story', 'stories', 'leader', 'leadermessage', 'keypartner', 'keypartnercard','network','networkcard'));
   }
 
   public function posttype($uri)
   {
-
 
     if (!check_posttype_uri($uri)) {
       abort(404);
@@ -67,6 +72,7 @@ class FrontpageController extends Controller
     if ($tmpl['template']) {
       $data['template'] = $data['template'];
     }
+
     if ($data) {
       $posts = PostModel::where('post_type', $data->id)->with('associatePosts')->orderBy('post_order', 'asc')->paginate(6);
     }

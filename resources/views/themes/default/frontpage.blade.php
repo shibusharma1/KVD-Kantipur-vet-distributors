@@ -44,11 +44,8 @@
         </div>
     </section>
 
-    <!-- =========================================
-                        OUR STORY SECTION
-                        ========================================= -->
+    {{-- OUR STORY SECTION --}}
     <section>
-        <!-- Background Soft Shape -->
         <div
             class="absolute top-0 right-0 w-[420px] h-[420px] bg-green-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
         </div>
@@ -57,24 +54,28 @@
                 <!-- LEFT CONTENT -->
                 <div class="reveal">
                     <span class="section-tag">
-                        Our Story
+                        {{-- Our Story --}}
+                        {{ $story->uid }}
                     </span>
                     <h2 class="mt-5 text-4xl md:text-5xl font-bold leading-tight max-w-2xl">
-                        Dedicated to
+                        {{-- Dedicated to
                         <span class="text-[var(--color-secondary)]">
                             Nepal’s Animal Health
                         </span>
-                        Since 2001
+                        Since 2001 --}}
+                        {{-- {!! $service->caption !!} --}}
+                        {!! html_entity_decode($story->caption) !!}
                     </h2>
                     <p class="mt-6 text-[16px] leading-9 max-w-2xl">
-                        Kantipur Vet Distributors Pvt. Ltd. was established with one clear mission — to bridge the gap
+                        {{-- Kantipur Vet Distributors Pvt. Ltd. was established with one clear mission — to bridge the gap
                         between world-class animal health innovations.
                         Our philosophy is simple:
                         <strong class="text-[var(--color-primary)]">
                             quality without compromise.
                         </strong>
                         Every product we distribute is rigorously sourced, properly stored, and delivered with full
-                        regulatory compliance.
+                        regulatory compliance.  --}}
+                        {{ $story->content }}
                     </p>
                     <!-- STATS -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
@@ -130,19 +131,22 @@
                         <div
                             class="relative z-10 inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/10 px-5 py-2 text-white text-xs font-bold tracking-[0.15em] uppercase">
                             Since 2001
+                            {{ $stories->post_title }}
                         </div>
                         <!-- TITLE -->
                         <h3 class="relative z-10 text-white text-3xl md:text-4xl font-bold leading-tight mt-7">
-                            KVD Group —
+                            {{-- KVD Group —
                             <span class="text-[var(--color-secondary)]">
                                 Two Decades of Trust
-                            </span>
+                            </span> --}}
+                            {!! $stories->post_excerpt !!}
                         </h3>
                         <!-- TEXT -->
                         <p class="relative z-10 text-white/75 leading-8 mt-6 text-[16px]">
-                            From a single office in Lalitpur to a nationwide distribution network covering all 7 provinces
+                            {{-- From a single office in Lalitpur to a nationwide distribution network covering all 7 provinces
                             of Nepal — our journey has been driven by an unwavering commitment to animal health and farmer
-                            prosperity.
+                            prosperity. --}}
+                            {{ $stories->post_content }}
                         </p>
                         <!-- MINI STATS -->
                         <div class="relative z-10 grid sm:grid-cols-2 gap-5 mt-10">
@@ -214,9 +218,7 @@
         </div>
     </section>
 
-    <!-- =========================================
-                           MESSAGE FROM MD SECTION
-                           ========================================= -->
+    {{-- MESSAGE FROM MD SECTION --}}
     <section>
         <!-- Background Shape -->
         <div class="absolute left-[-120px] top-20 w-[320px] h-[320px] bg-[var(--color-secondary)]/10 rounded-full blur-3xl">
@@ -225,13 +227,15 @@
             <!-- SECTION HEADER -->
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                 <span class="section-tag justify-center">
-                    Leadership
+                    {{-- Leadership --}}
+                    {{ $leader->post_type }}
                 </span>
                 <h2 class="mt-5 text-4xl md:text-5xl font-bold leading-tight">
                     Message from our
                     <span class="text-[var(--color-secondary)] italic">
-                        Managing Director
+                        {{ strip_tags($leader->caption) }}
                     </span>
+
                 </h2>
             </div>
             <!-- MAIN GRID -->
@@ -243,15 +247,15 @@
                         <!-- IMAGE -->
                         <div
                             class="relative rounded-[24px] overflow-hidden bg-gradient-to-br from-[var(--color-primary)] to-[#221d63] h-[520px] flex items-center justify-center">
-                            <img src="{{ asset('assets/uploads/img/md.jpg') }}" alt="Managing Director"
-                                class="w-full h-full object-cover" />
+                            <img src="{{ $leader->banner ? asset('uploads/medium/' . $leader->banner) : asset('assets/uploads/img/md.jpg') }}"
+                                alt="{{ $leader->uid }}" class="w-full h-full object-cover" />
                             <!-- Overlay -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                             <!-- Caption -->
                             <div class="absolute bottom-0 left-0 right-0 p-8">
                                 <div class="backdrop-blur-md bg-white/10 border border-white/10 rounded-[20px] p-5">
                                     <h4 class="text-white text-xl font-bold">
-                                        Managing Director
+                                        {{ $leader->uid }}
                                     </h4>
                                     <p class="text-white/70 text-sm mt-1">
                                         {{ $setting->site_name }}
@@ -280,13 +284,15 @@
                 <!-- RIGHT CONTENT -->
                 <div class="reveal">
                     <span class="section-tag">
-                        MD's Message
+                        {{-- MD's Message --}}
+                        {{ $leadermessage->post_title }}
                     </span>
                     <h3 class="mt-5 text-3xl md:text-4xl font-bold leading-tight max-w-2xl">
-                        Building a Healthier Nepal,
-                        <span class="text-[var(--color-secondary)]">
-                            One Farm at a Time
-                        </span>
+                        {{-- Building a Healthier Nepal, --}}
+                        {{-- <span class="text-[var(--color-secondary)]"> --}}
+                        {{-- One Farm at a Time --}}
+                        {{-- </span> --}}
+                        {{ $leadermessage->post_excerpt }}
                     </h3>
                     <!-- QUOTE -->
                     <div class="modern-card mt-4 p-2 border-l-4 border-[var(--color-secondary)] bg-white">
@@ -294,27 +300,27 @@
                             “
                         </div>
                         <p class="text-[18px] leading-9 italic text-[var(--color-dark)]">
-                            Our commitment has always been to deliver not just products, but trust. Every medicine, every
-                            vaccine, every supplement we distribute carries our promise of quality.
+                            {!! $leader->content !!}
                         </p>
                     </div>
                     <!-- CONTENT -->
                     <div class="mt-8 space-y-6">
                         <p class="text-[16px] leading-9">
-                            Since founding Kantipur Vet Distributors in 2001, our vision has remained steadfast: to be
+                            {{-- Since founding Kantipur Vet Distributors in 2001, our vision has remained steadfast: to be
                             Nepal's most reliable partner in animal health. We have expanded our reach and strengthened our
                             partnerships with global manufacturers to ensure Nepal's farmers receive world-class veterinary
                             solutions.
                             Today, with over 3,000 products, 40+ global partners, and a dedicated team of professionals, we
                             continue to move forward with innovation, integrity, and commitment toward Nepal’s agricultural
-                            prosperity.
+                            prosperity. --}}
+                            {!! $leadermessage->post_content !!}
                         </p>
                     </div>
                     <!-- SIGNATURE -->
                     <div class="mt-10 pt-8 border-t border-gray-200 flex items-center justify-between flex-wrap gap-5">
                         <div>
                             <h5 class="text-2xl font-bold text-[var(--color-primary)]">
-                                Managing Director
+                                {{ strip_tags($leader->caption) }}
                             </h5>
                             <p class="mt-1 text-sm font-semibold tracking-wide uppercase text-gray-500">
                                 {{ $setting->site_name }}
@@ -391,8 +397,8 @@
                         @foreach ($videos->skip(1) as $video)
                             <div class="reveal">
                                 <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
-                                    <img src="{{ asset('uploads/medium/' . $video->page_thumbnail) }}"
-                                        alt="" loading="lazy"
+                                    <img src="{{ asset('uploads/medium/' . $video->page_thumbnail) }}" alt=""
+                                        loading="lazy"
                                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                                     <div
                                         class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
@@ -406,7 +412,7 @@
                                     </button>
                                     <div class="absolute bottom-0 left-0 right-0 p-6">
                                         <h3 class="text-xl font-bold text-white leading-tight">
-                                            {{  $video->post_title  }}
+                                            {{ $video->post_title }}
                                         </h3>
                                     </div>
                                 </div>
@@ -484,11 +490,6 @@
         </div>
     </section>
 
-
-
-
-
-
     {{-- Need confirmation regarding this --}}
     <section id="services" style="overflow: visible !important;">
         <!-- BACKGROUND SHAPES -->
@@ -500,17 +501,20 @@
                 <!-- LEFT STICKY CONTENT -->
                 <div class="lg:sticky lg:top-[140px] self-start reveal">
                     <span class="section-tag">
-                        Our Services
+                        {{-- Our Services --}}
+                        {{ $service->post_type }}
                     </span>
                     <h2 class="mt-5 text-4xl md:text-5xl font-bold leading-tight">
-                        Services Built
-                        <span class="text-[var(--color-secondary)]">
-                            Around You
-                        </span>
+                        {{-- Services Built --}}
+                        {{-- <span class="text-[var(--color-secondary)]"> --}}
+                        {{-- Around You --}}
+                        {{-- </span> --}}
+                        {{ $service->uuid }}
                     </h2>
                     <p class="mt-7 text-[16px] leading-9">
-                        Beyond distribution, we provide expert technical support, cold-chain logistics, training, and
-                        consultation to help Nepal’s entire animal health ecosystem thrive.
+                        {{-- Beyond distribution, we provide expert technical support, cold-chain logistics, training, and
+                        consultation to help Nepal’s entire animal health ecosystem thrive. --}}
+                        {!! $service->caption !!}
                     </p>
                     <!-- CTA CARD -->
                     <div class="modern-card mt-10 p-7 bg-[var(--color-surface-200)] border border-slate-100">
@@ -528,7 +532,7 @@
                                 </p>
                                 <a href="tel:+97715186604"
                                     class="inline-flex items-center gap-2 mt-5 font-bold text-[var(--color-secondary)] hover:gap-3 transition-all duration-300">
-                                    Call +977-01-5186604
+                                    Call {{ $setting->phone }}
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
@@ -538,7 +542,7 @@
                 <!-- RIGHT SERVICES GRID -->
                 <div class="grid sm:grid-cols-2 gap-6 reveal">
                     <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
+                    {{-- <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
                         <div
                             class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
                             <i class="fa-solid fa-stethoscope"></i>
@@ -550,77 +554,30 @@
                             Our qualified veterinary advisors provide expert product guidance and disease management support
                             for farms, clinics, and veterinary professionals.
                         </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
-                            <i class="fa-solid fa-truck-fast"></i>
+                    </div> --}}
+                    @foreach ($services as $service)
+                        <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
+
+                            {{-- ICON (stored in DB as HTML) --}}
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
+
+                                {!! $service->post_excerpt !!}
+                            </div>
+
+                            {{-- TITLE --}}
+                            <h3 class="mt-7 text-2xl font-bold leading-tight">
+                                {{ $service->post_title }}
+                            </h3>
+
+                            {{-- DESCRIPTION --}}
+                            <p class="mt-5 text-[16px] leading-8">
+                                {!! $service->post_content !!}
+                            </p>
+
                         </div>
-                        <h3 class="mt-7 text-2xl font-bold leading-tight">
-                            Nationwide Distribution
-                        </h3>
-                        <p class="mt-5 text-[16px] leading-8">
-                            Reliable logistics across all 7 provinces with temperature-controlled delivery systems for
-                            vaccines, biologics, and sensitive medicines.
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
-                            <i class="fa-solid fa-snowflake"></i>
-                        </div>
-                        <h3 class="mt-7 text-2xl font-bold leading-tight">
-                            Cold Chain Storage
-                        </h3>
-                        <p class="mt-5 text-[16px] leading-8">
-                            Advanced refrigerated warehousing facilities ensuring complete product integrity from import and
-                            storage to final distribution.
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
-                            <i class="fa-solid fa-file-shield"></i>
-                        </div>
-                        <h3 class="mt-7 text-2xl font-bold leading-tight">
-                            Regulatory Compliance
-                        </h3>
-                        <p class="mt-5 text-[16px] leading-8">
-                            Complete support for import permits, registrations, and compliance documentation with Nepal’s
-                            livestock authorities.
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <h3 class="mt-7 text-2xl font-bold leading-tight">
-                            Training & Workshops
-                        </h3>
-                        <p class="mt-5 text-[16px] leading-8">
-                            Technical workshops and professional training programs focused on biosecurity, disease
-                            management, and proper product use.
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
-                            <i class="fa-solid fa-globe"></i>
-                        </div>
-                        <h3 class="mt-7 text-2xl font-bold leading-tight">
-                            Global Product Sourcing
-                        </h3>
-                        <p class="mt-5 text-[16px] leading-8">
-                            Access to specialty veterinary products through our extensive network of trusted global
-                            manufacturers and suppliers.
-                        </p>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -634,116 +591,43 @@
             <!-- SECTION HEADER -->
             <div class="text-center max-w-3xl mx-auto mb-8 reveal">
                 <span class="section-tag justify-center">
-                    Key Partners
+                    {{-- Key Partners --}}
+                    {{ $keypartner->uid }}
                 </span>
                 <h2 class="mt-5 text-4xl md:text-5xl font-bold leading-tight">
-                    40+ World-Renowned
+                    {{-- 40+ World-Renowned
                     <span class="text-[var(--color-secondary)] italic">
                         Global Partners
-                    </span>
+                    </span> --}}
+                    {{ strip_tags($keypartner->caption) }}
                 </h2>
                 <p class="mt-6 text-[16px] leading-9">
-                    We collaborate with the world’s most trusted animal health manufacturers to deliver only the highest
-                    quality veterinary solutions across Nepal.
+                    {{-- We collaborate with the world’s most trusted animal health manufacturers to deliver only the highest
+                    quality veterinary solutions across Nepal. --}}
+                    {!! $keypartner->content !!}
                 </p>
             </div>
             <!-- SLIDER WRAPPER -->
             <div class="relative reveal">
-                <!-- GRADIENTS -->
-                <!-- <div class="absolute left-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-r from-white to-transparent pointer-events-none"></div> -->
-                <!-- <div class="absolute right-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-l from-white to-transparent pointer-events-none"></div> -->
-                <!-- SLIDER -->
+
                 <div id="partnersSlider" class="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-4">
                     <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-[var(--color-primary)]/10 text-4xl flex items-center justify-center">
-                            🧪
+                    @foreach ($keypartnercard as $card)
+                        <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
+                            <div
+                                class="w-20 h-20 mx-auto rounded-[24px] bg-[var(--color-primary)]/10 text-4xl flex items-center justify-center">
+                                {{ $card->post_excerpt }}
+                            </div>
+
+                            <h3 class="mt-6 text-2xl font-bold">
+                                {{ $card->post_title }}
+                            </h3>
+
+                            <p class="mt-2 text-sm font-semibold text-gray-500">
+                                {{ strip_tags($card->post_content) }}
+                            </p>
                         </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Adisseo
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇫🇷 France
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-green-100 text-4xl flex items-center justify-center">
-                            🔬
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            NHF
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇩🇪 Germany
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-blue-100 text-4xl flex items-center justify-center">
-                            💊
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Interchemie
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇳🇱 Netherlands
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-orange-100 text-4xl flex items-center justify-center">
-                            🌡
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Avitech
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇸🇬 Singapore
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-emerald-100 text-4xl flex items-center justify-center">
-                            🌿
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Natural Remedies
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇮🇳 India
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div class="w-20 h-20 mx-auto rounded-[24px] bg-red-100 text-4xl flex items-center justify-center">
-                            🏥
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Elanco
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇺🇸 USA
-                        </p>
-                    </div>
-                    <!-- CARD -->
-                    <div class="partner-card min-w-[280px] modern-card bg-white p-8 text-center flex-shrink-0">
-                        <div
-                            class="w-20 h-20 mx-auto rounded-[24px] bg-indigo-100 text-4xl flex items-center justify-center">
-                            💉
-                        </div>
-                        <h3 class="mt-6 text-2xl font-bold">
-                            Boehringer
-                        </h3>
-                        <p class="mt-2 text-sm font-semibold text-gray-500">
-                            🇩🇪 Germany
-                        </p>
-                    </div>
+                    @endforeach
                 </div>
                 <!-- NAVIGATION -->
                 <div class="flex items-center justify-center gap-4 mt-8">
@@ -760,9 +644,7 @@
         </div>
     </section>
 
-    <!-- =========================================
-                           NUMBERS / STATS SECTION
-                           ========================================= -->
+    {{-- NUMBERS / STATS SECTION --}}
     <section id="numbers" style="background-color: white;">
         <!-- BACKGROUND -->
         <div class="absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-white),#f8fafc)]"></div>
@@ -910,84 +792,50 @@
                 <!-- LEFT CONTENT -->
                 <div class="reveal">
                     <span class="section-tag">
-                        Nationwide Network
+                        {{-- Nationwide Network --}}
+                        {{ $network->uid }}
                     </span>
                     <h3 class="mt-5 text-4xl font-bold leading-tight max-w-2xl">
-                        From
+                        {{-- From
                         <span class="text-[var(--color-secondary)] italic">
                             Terai Plains
                         </span>
                         to
                         <span class="text-[var(--color-secondary)] italic">
                             Himalayan Hills
-                        </span>
+                        </span> --}}
+                        {{ strip_tags($network->caption) }}
                     </h3>
                     <p class="mt-7 text-[16px] leading-9 max-w-2xl">
-                        Our extensive supply chain and logistics infrastructure ensure that world-class veterinary
-                        medicines, vaccines, and feed supplements reach every region of Nepal efficiently and safely.
+                        {{-- Our extensive supply chain and logistics infrastructure ensure that world-class veterinary
+                        medicines, vaccines, and feed supplements reach every region of Nepal efficiently and safely. --}}
+                        {!! $network->content !!}
                     </p>
                     <!-- FEATURES -->
                     <div class="mt-10 grid sm:grid-cols-2 gap-5">
                         <!-- ITEM -->
-                        <div class="modern-card bg-white p-6 flex items-start gap-4">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-2xl flex-shrink-0">
-                                <i class="fa-solid fa-shop"></i>
+                        @foreach ($networkcard as $card)
+                            <div class="modern-card bg-white p-6 flex items-start gap-4">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-2xl flex-shrink-0">
+                                    {{-- <i class="fa-solid fa-shop"></i> --}}
+                                    {!! $card->post_excerpt !!}
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold">
+                                        {{-- 500+ Retail Points --}}
+                                        {{ $card->post_title }}
+                                    </h4>
+                                    <p class="text-sm mt-2 leading-7">
+                                        {{-- Distribution network covering veterinary stores nationwide. --}}
+                                        {!! $card->post_content !!}
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-bold">
-                                    500+ Retail Points
-                                </h4>
-                                <p class="text-sm mt-2 leading-7">
-                                    Distribution network covering veterinary stores nationwide.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="modern-card bg-white p-6 flex items-start gap-4">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-green-100 text-[var(--color-secondary)] flex items-center justify-center text-2xl flex-shrink-0">
-                                <i class="fa-solid fa-truck-fast"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold">
-                                    Fast Delivery
-                                </h4>
-                                <p class="text-sm mt-2 leading-7">
-                                    24–48 hour delivery service inside Kathmandu Valley.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="modern-card bg-white p-6 flex items-start gap-4">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-500 flex items-center justify-center text-2xl flex-shrink-0">
-                                <i class="fa-solid fa-user-group"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold">
-                                    Regional Teams
-                                </h4>
-                                <p class="text-sm mt-2 leading-7">
-                                    Dedicated sales and technical teams in every province.
-                                </p>
-                            </div>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="modern-card bg-white p-6 flex items-start gap-4">
-                            <div
-                                class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl flex-shrink-0">
-                                <i class="fa-solid fa-snowflake"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold">
-                                    Cold Chain Logistics
-                                </h4>
-                                <p class="text-sm mt-2 leading-7">
-                                    Temperature-controlled transport for vaccines & biologics.
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
+
+
+
                     </div>
                 </div>
                 <!-- RIGHT CARD -->
@@ -1072,8 +920,8 @@
     </section>
 
     <!-- =========================================
-                           LATEST NEWS & ANNOUNCEMENTS
-                           ========================================= -->
+                                                                   LATEST NEWS & ANNOUNCEMENTS
+                                                                   ========================================= -->
     <section id="news">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1513,8 +1361,8 @@
         </div>
     </section>
     <!-- =========================================
-                           VIDEO MODAL
-                           ========================================= -->
+                                                                   VIDEO MODAL
+                                                                   ========================================= -->
     <div id="videoModal"
         class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-5">
         <!-- CLOSE -->

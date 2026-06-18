@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php*/?> ?> ?>
+                    <?php*/?> 
                     {{-- <div class="form-group">
             <label for="inputSelect" class="col-lg-2 control-label"> Category </label>
             <div class="col-lg-9">

@@ -23,12 +23,14 @@
             </h1>
         </div>
     </section>
+
     <section>
         <div class="max-w-7xl mx-auto px-5 lg:px-8">
             <div class="grid lg:grid-cols-[1fr_420px] gap-16 items-center">
                 <div class="reveal">
                     <span class="section-tag">
-                        Our Services
+                        {{-- Our data --}}
+                        {{ $data->post_type }}
                     </span>
                     <h2 class="mt-5 text-4xl md:text-5xl font-bold leading-tight">
                         Complete Veterinary
@@ -39,7 +41,7 @@
                     <p class="mt-6 text-[16px] leading-9 max-w-2xl">
                         Beyond product distribution, we provide technical expertise,
                         logistics support, cold-chain management, professional training,
-                        and veterinary consultation services throughout Nepal.
+                        and veterinary consultation data throughout Nepal.
                     </p>
                 </div>
                 <div class="modern-card p-8 reveal">
@@ -99,9 +101,7 @@
                     innovation, expertise, and a nationwide support network.
                 </p>
             </div>
-            <!-- Cards -->
             <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
                 <div class="modern-card p-10 reveal group">
                     <div class="flex items-center justify-between">
                         <div
@@ -165,7 +165,8 @@
         <div class="max-w-7xl mx-auto px-5 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="section-tag justify-center">
-                    Our Services
+                    {{-- Our data --}}
+                    {{ $data->post_type }}
                 </span>
                 <h2 class="mt-5 text-4xl md:text-5xl font-bold">
                     Excellence in
@@ -175,79 +176,26 @@
                 </h2>
             </div>
             <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-stethoscope"></i>
+                @foreach ($posts as $service)
+                    <div class="modern-card bg-[var(--color-surface-200)] p-8 group">
+                        {{-- ICON (stored in DB as HTML) --}}
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center text-3xl transition duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
+                            {!! $service->post_excerpt !!}
+                        </div>
+
+                        {{-- TITLE --}}
+                        <h3 class="mt-7 text-2xl font-bold leading-tight">
+                            {{ $service->post_title }}
+                        </h3>
+
+                        {{-- DESCRIPTION --}}
+                        <p class="mt-5 text-[16px] leading-8">
+                            {!! $service->post_content !!}
+                        </p>
+
                     </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Veterinary Consultation
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Expert guidance for disease management,
-                        treatment planning and preventive healthcare.
-                    </p>
-                </div>
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-truck-fast"></i>
-                    </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Distribution Network
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Reliable nationwide delivery of veterinary medicines and feed additives.
-                    </p>
-                </div>
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-snowflake"></i>
-                    </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Cold Chain Logistics
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Advanced temperature-controlled storage and transportation systems.
-                    </p>
-                </div>
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Training Programs
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Professional workshops and technical training for veterinary professionals.
-                    </p>
-                </div>
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-file-shield"></i>
-                    </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Regulatory Support
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Assistance with registrations, permits and compliance requirements.
-                    </p>
-                </div>
-                <div class="modern-card p-8 group reveal">
-                    <div
-                        class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl group-hover:bg-primary group-hover:text-white transition">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-                    <h3 class="mt-7 text-2xl font-bold">
-                        Global Sourcing
-                    </h3>
-                    <p class="mt-5 leading-8">
-                        Access to world-renowned veterinary healthcare manufacturers.
-                    </p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
