@@ -45,12 +45,13 @@ class FrontpageController extends Controller
     $blogs = PostModel::where('post_type', '3')->orderBy('post_order', 'asc')->take(5)->get();
     $frontpageData = PostTypeModel::where('id', '10')->first();
     $productcategories = ProductCategory::where('show_in_home', 1)->where('is_active', 1)->latest()->take(4)->get();
+    $videos = PostModel::where('post_type', '15')->orderBy('post_order', 'asc')->latest()->take(5)->get();
     // $commitment = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '28'])->with('images')->first();
     // $research = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '29'])->with('associatePosts')->first();
     // $strength = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '30'])->first();
     // $team = PostModel::where(['post_type'=> $frontpageData->id , 'id' => '31'])->first();
     // dd($frontpageData, $commitment , $strength,$research,$team);
-    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories'));
+    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories','videos'));
   }
 
   public function posttype($uri)
@@ -106,8 +107,8 @@ class FrontpageController extends Controller
     $multiphotos = $data->images()->orderBy('created_at', 'desc')->paginate(6);
     $recent_blogs = PostModel::where('post_type', $data->post_type)->where('id', '!=', $data->id)->latest('created_at')->take(5)->get();
     // dd( $data,$data_child,$related_posts);
-  
-    return view('themes.default.' . $data['template'] . '', compact('data', 'data_child', 'associated_posts', 'documents', 'pos_type', 'related_posts', 'multiphotos','recent_blogs'));
+
+    return view('themes.default.' . $data['template'] . '', compact('data', 'data_child', 'associated_posts', 'documents', 'pos_type', 'related_posts', 'multiphotos', 'recent_blogs'));
   }
 
   public function product_detail($uri)
@@ -495,5 +496,34 @@ class FrontpageController extends Controller
       return view('themes.default.template-project-list', compact('post', 'parent_post'));
     }
     return false;
+  }
+  public function ajaxBlogSearch(Request $request)
+  {
+    $search = trim($request->search);
+
+    if (strlen($search) < 2) {
+      return response()->json([
+        'success' => true,
+        'data' => []
+      ]);
+    }
+
+    $blogs = PostModel::query()->where('post_type', 3)->where(function ($query) use ($search) {
+      $query->where('post_title', 'LIKE', "%{$search}%")
+        ->orWhere('post_excerpt', 'LIKE', "%{$search}%");
+    })->latest()
+      ->take(5)
+      ->get([
+        'post_title',
+        'uri',
+        'page_key',
+        'created_at',
+        'page_thumbnail'
+      ]);
+
+    return response()->json([
+      'success' => true,
+      'data' => $blogs
+    ]);
   }
 }

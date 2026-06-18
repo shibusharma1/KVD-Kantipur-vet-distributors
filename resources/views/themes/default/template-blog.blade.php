@@ -162,15 +162,27 @@
 
                         <!-- Search -->
                         <div class="p-6 border rounded-2xl">
-                            <h3 class="text-2xl font-bold text-primary">Search</h3>
+
+                            <h3 class="text-2xl font-bold text-primary">
+                                Search
+                            </h3>
+
                             <div class="relative mt-5">
-                                <input type="text" placeholder="Search blog..."
+
+                                <input id="blogSearch" type="text" placeholder="Search blog..." autocomplete="off"
                                     class="w-full h-12 rounded-xl border px-4 pr-10 focus:ring-2 focus:ring-primary/20 outline-none">
 
                                 <button class="absolute right-3 top-1/2 -translate-y-1/2 text-primary">
+
                                     <i class="fa-solid fa-magnifying-glass"></i>
+
                                 </button>
+
                             </div>
+
+                            <div id="searchResults" class="mt-4 hidden border rounded-xl overflow-hidden bg-white">
+                            </div>
+
                         </div>
 
                         <!-- Categories -->
@@ -257,5 +269,90 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const input = document.getElementById('blogSearch');
+            const results = document.getElementById('searchResults');
+
+            let timeout;
+
+            input.addEventListener('keyup', function() {
+
+                clearTimeout(timeout);
+
+                const keyword = this.value.trim();
+
+                timeout = setTimeout(() => {
+                    if (keyword.length < 2) {
+                        results.classList.add('hidden');
+                        results.innerHTML = '';
+                        return;
+                    }
+                    results.classList.remove('hidden');
+                    results.innerHTML = `
+                <div class="p-4 text-center text-gray-500">
+                    Searching...
+                </div>
+            `;
+                    fetch(
+                            `{{ route('ajax.blog.search') }}?search=${encodeURIComponent(keyword)}`
+                        )
+                        .then(response => response.json())
+                        .then(response => {
+                            let html = '';
+                            if (response.data.length === 0) {
+
+                                html = `
+                        <div class="p-4 text-center text-gray-500">
+                            No blogs found
+                        </div>
+                    `;
+                            } else {
+                                response.data.forEach(post => {
+                                    const url = '/' + post.uri + '.html';
+
+                                    html += `
+                            <a href="${url}"
+                               class="block p-4 border-b hover:bg-gray-50">
+
+                                <h4 class="font-semibold text-primary">
+                                    ${post.post_title}
+                                </h4>
+
+                                <p class="text-xs text-gray-400 mt-1">
+                                 ${new Date(post.created_at).toLocaleDateString('en-GB', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    }).replace(' ', ' ').replace(/(\d+) (\w+) (\d+)/, '$1 $2, $3')}
+                                </p>
+
+                            </a>
+                        `;
+                                });
+                            }
+                            results.innerHTML = html;
+                        })
+                        .catch(() => {
+                            results.innerHTML = `
+                    <div class="p-4 text-center text-red-500">
+                        Something went wrong
+                    </div>
+                `;
+                        });
+                }, 300);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (
+                    !input.contains(e.target) &&
+                    !results.contains(e.target)
+                ) {
+                    results.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 
 @endsection

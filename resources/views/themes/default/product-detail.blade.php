@@ -165,7 +165,7 @@
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     @else
-                        <a href="{{ url('/page/contact') }}" class="primary-btn mt-8">
+                        <a href="{{ url('/page/contact.html') }}" class="primary-btn mt-8">
                             Contact For Inquiry
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>

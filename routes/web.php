@@ -17,6 +17,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::get('/', 'FrontendControllers\FrontpageController@index');
+Route::get('/ajax/blog-search', 'FrontendControllers\FrontpageController@ajaxBlogSearch')->name('ajax.blog.search');
 // Route::get('/contactus', 'FrontendControllers\FrontpageController@index')->name('contactus');
 
 /* Products Routes */
@@ -84,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
     // Product and it's categories route
     Route::delete('delete_product_category_banner/{id}', 'AdminControllers\Products\ProductCategoryController@delete_banner');
     Route::delete('delete_product_category_icon/{id}', 'AdminControllers\Products\ProductCategoryController@delete_icon');
-    Route::delete('delete_product_image/{id}','AdminControllers\Products\ProductController@delete_image');
+    Route::delete('delete_product_image/{id}', 'AdminControllers\Products\ProductController@delete_image');
 
 
     Route::resource('admin.multiplephoto', 'AdminControllers\Posts\PostImageController');

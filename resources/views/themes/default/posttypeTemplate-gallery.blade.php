@@ -41,7 +41,7 @@
                 <p class="mt-5 text-[16px] leading-9">
                     {{-- Explore highlights from our corporate events, training programs,
                     product launches, field visits and milestones across Nepal. --}}
-                     {!! $data->content !!}
+                    {!! $data->content !!}
                 </p>
             </div>
         </div>
@@ -80,7 +80,7 @@
                     @endphp
 
                     <div class="{{ $isLarge ? 'lg:col-span-2' : '' }} reveal">
-                        <a href="{{ $image }}" class="group block overflow-hidden rounded-[32px] modern-card">
+                        <a href="{{ $image }}" class="gallery-item group block overflow-hidden rounded-[32px] modern-card">
 
                             <div class="relative overflow-hidden">
                                 <img src="{{ $image }}" alt="{{ $post->post_title }}"
@@ -108,5 +108,14 @@
             @endif
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <script>
+        GLightbox({
+            selector: '.gallery-item',
+            loop: true
+        });
+    </script>
 
 @endsection

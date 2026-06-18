@@ -45,8 +45,8 @@
     </section>
 
     <!-- =========================================
-        OUR STORY SECTION
-        ========================================= -->
+                        OUR STORY SECTION
+                        ========================================= -->
     <section>
         <!-- Background Soft Shape -->
         <div
@@ -113,7 +113,7 @@
                     </div>
                     <!-- BUTTON -->
                     <div class="mt-8">
-                        <a href="#contact" class="primary-btn">
+                        <a href="{{ url('/page/about.html') }}" class="primary-btn">
                             Learn More About Us
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -215,8 +215,8 @@
     </section>
 
     <!-- =========================================
-           MESSAGE FROM MD SECTION
-           ========================================= -->
+                           MESSAGE FROM MD SECTION
+                           ========================================= -->
     <section>
         <!-- Background Shape -->
         <div class="absolute left-[-120px] top-20 w-[320px] h-[320px] bg-[var(--color-secondary)]/10 rounded-full blur-3xl">
@@ -326,9 +326,7 @@
         </div>
     </section>
 
-    <!-- =========================================
-           GALLERY & CORPORATE VIDEOS SECTION
-           ========================================= -->
+    {{-- GALLERY & CORPORATE VIDEOS SECTION --}}
     <section id="gallery">
         <!-- Background Glow -->
         <div class="absolute top-0 left-0 w-[420px] h-[420px] bg-[var(--color-primary)]/20 rounded-full blur-3xl"></div>
@@ -354,63 +352,68 @@
 
             <div class="grid lg:grid-cols-12 gap-5">
                 <!-- LARGE VIDEO -->
-                <div class="lg:col-span-6 reveal">
-                    <div class="group relative h-[420px] overflow-hidden rounded-[30px] bg-black modern-card">
-                        <!-- IMAGE -->
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop"
-                            alt="" loading="lazy"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                        <!-- OVERLAY -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.88)] via-[rgba(0,0,0,0.15)] to-transparent">
-                        </div>
-                        <!-- PLAY BUTTON -->
-                        <button data-video="{{ asset('assets/uploads/vdo/kvd.mp4') }}"
-                            class="video-btn absolute inset-0 flex items-center justify-center">
+                @if (isset($videos[0]))
+                    <div class="lg:col-span-6 reveal">
+                        <div class="group relative h-[420px] overflow-hidden rounded-[30px] bg-black modern-card">
+                            <!-- IMAGE -->
+                            <img src="{{ asset('uploads/medium/' . $videos[0]->page_thumbnail) }}" alt=""
+                                loading="lazy"
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <!-- OVERLAY -->
                             <div
-                                class="w-12 h-12 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center shadow-[0_0_40px_rgba(56,172,75,0.5)] transition duration-300 group-hover:scale-110">
-                                <i class="fa-solid fa-play text-3xl ml-1"></i>
+                                class="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.88)] via-[rgba(0,0,0,0.15)] to-transparent">
                             </div>
-                        </button>
-                        <!-- CONTENT -->
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span
-                                class="inline-block text-xs uppercase tracking-[0.18em] font-bold text-[var(--color-secondary)]">
-                                Corporate Video
-                            </span>
-                            <h3 class="mt-3 text-3xl font-bold text-white leading-tight">
-                                KVD Corporate Story 2024
-                            </h3>
+                            <!-- PLAY BUTTON -->
+                            <button data-video="{{ asset('uploads/videos/' . $videos[0]->page_video) }}"
+                                class="video-btn absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center shadow-[0_0_40px_rgba(56,172,75,0.5)] transition duration-300 group-hover:scale-110">
+                                    <i class="fa-solid fa-play text-3xl ml-1"></i>
+                                </div>
+                            </button>
+                            <!-- CONTENT -->
+                            <div class="absolute bottom-0 left-0 right-0 p-8">
+                                <span
+                                    class="inline-block text-xs uppercase tracking-[0.18em] font-bold text-[var(--color-secondary)]">
+                                    {{ $videos[0]->post_title }}
+                                </span>
+                                <h3 class="mt-3 text-3xl font-bold text-white leading-tight">
+                                    {{ $videos[0]->sub_title }}
+                                </h3>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
                 <!-- RIGHT GRID -->
                 <div class="lg:col-span-6">
                     <div class="grid sm:grid-cols-2 gap-5">
                         <!-- ITEM -->
-                        <div class="reveal">
-                            <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
-                                <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1200&auto=format&fit=crop"
-                                    alt="" loading="lazy"
-                                    class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
-                                </div>
-                                <button data-video="{{ asset('assets/uploads/vdo/kvd.mp4') }}"
-                                    class="video-btn absolute inset-0 flex items-center justify-center">
+                        @foreach ($videos->skip(1) as $video)
+                            <div class="reveal">
+                                <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
+                                    <img src="{{ asset('uploads/medium/' . $video->page_thumbnail) }}"
+                                        alt="" loading="lazy"
+                                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                                     <div
-                                        class="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center shadow-[0_0_30px_rgba(56,172,75,0.45)] transition duration-300 group-hover:scale-110">
-                                        <i class="fa-solid fa-play text-xl ml-1"></i>
+                                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
                                     </div>
-                                </button>
-                                <div class="absolute bottom-0 left-0 right-0 p-6">
-                                    <h3 class="text-xl font-bold text-white leading-tight">
-                                        Our Warehouse & Cold Chain
-                                    </h3>
+                                    <button data-video="{{ asset('uploads/videos/' . $video->page_video) }}"
+                                        class="video-btn absolute inset-0 flex items-center justify-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center shadow-[0_0_30px_rgba(56,172,75,0.45)] transition duration-300 group-hover:scale-110">
+                                            <i class="fa-solid fa-play text-xl ml-1"></i>
+                                        </div>
+                                    </button>
+                                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                                        <h3 class="text-xl font-bold text-white leading-tight">
+                                            {{  $video->post_title  }}
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                         <!-- ITEM -->
-                        <div class="reveal">
+                        {{-- <div class="reveal">
                             <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
                                 <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=1200&auto=format&fit=crop"
                                     alt="" loading="lazy"
@@ -430,9 +433,9 @@
                                     </h3>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ITEM -->
-                        <div class="reveal">
+                        {{-- <div class="reveal">
                             <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
                                 <img src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?q=80&w=1200&auto=format&fit=crop"
                                     alt="" loading="lazy"
@@ -452,9 +455,9 @@
                                     </h3>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ITEM -->
-                        <div class="reveal">
+                        {{-- <div class="reveal">
                             <div class="group relative h-[200px] overflow-hidden rounded-[28px] bg-black modern-card">
                                 <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop"
                                     alt="" loading="lazy"
@@ -474,16 +477,19 @@
                                     </h3>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- =========================================
-           SERVICES SECTION
-           ========================================= -->
+
+
+
+
+
+    {{-- Need confirmation regarding this --}}
     <section id="services" style="overflow: visible !important;">
         <!-- BACKGROUND SHAPES -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -620,9 +626,7 @@
         </div>
     </section>
 
-    <!-- =========================================
-           GLOBAL PARTNERS SECTION
-           ========================================= -->
+    {{-- This section will also be static --}}
     <section id="partners">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -757,8 +761,8 @@
     </section>
 
     <!-- =========================================
-           NUMBERS / STATS SECTION
-           ========================================= -->
+                           NUMBERS / STATS SECTION
+                           ========================================= -->
     <section id="numbers" style="background-color: white;">
         <!-- BACKGROUND -->
         <div class="absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-white),#f8fafc)]"></div>
@@ -878,9 +882,7 @@
         </div>
     </section>
 
-    <!-- =========================================
-           SERVING ALL OF NEPAL
-           ========================================= -->
+    {{-- This will be static section --}}
     <section id="coverage">
         <!-- BACKGROUND -->
         <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1070,8 +1072,8 @@
     </section>
 
     <!-- =========================================
-           LATEST NEWS & ANNOUNCEMENTS
-           ========================================= -->
+                           LATEST NEWS & ANNOUNCEMENTS
+                           ========================================= -->
     <section id="news">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1097,117 +1099,106 @@
             <!-- NEWS LAYOUT -->
             <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 mt-8">
                 <!-- FEATURED NEWS -->
-                <div class="reveal">
-                    <div
-                        class="group rounded-[36px] bg-[var(--color-primary)] p-10 md:p-12 h-full shadow-[0_20px_60px_rgba(52,47,127,0.15)]">
-                        <!-- GLOW -->
-                        <div class="absolute top-0 right-0 w-[240px] h-[240px] bg-white/10 rounded-full blur-3xl"></div>
-                        <div class="relative z-10">
-                            <!-- TAG -->
-                            <div
-                                class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/10 border border-white/10 text-white text-xs uppercase tracking-[0.15em] font-bold">
-                                <span class="w-2 h-2 rounded-full bg-[var(--color-secondary)]"></span>
-                                Latest Announcement
+                @php
+                    $featuredBlog = $blogs->first();
+                @endphp
+
+                @if ($featuredBlog)
+                    <div class="reveal">
+
+                        <div
+                            class="group rounded-[36px] bg-[var(--color-primary)] p-10 md:p-12 h-full shadow-[0_20px_60px_rgba(52,47,127,0.15)]">
+
+                            <div class="relative z-10">
+
+                                <div
+                                    class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/10 border border-white/10 text-white text-xs uppercase tracking-[0.15em] font-bold">
+
+                                    <span class="w-2 h-2 rounded-full bg-[var(--color-secondary)]"></span>
+
+                                    Latest Announcement
+
+                                </div>
+
+                                <div class="mt-5 text-white/60 text-sm font-semibold tracking-wide uppercase">
+
+                                    {{ date('F d, Y', strtotime($featuredBlog->post_date)) }}
+
+                                </div>
+
+                                <h3 class="mt-5 text-3xl md:text-4xl font-bold leading-tight text-white">
+
+                                    {{ $featuredBlog->post_title }}
+
+                                </h3>
+
+                                <p class="mt-6 text-white/75 text-[16px] leading-9 max-w-2xl">
+
+                                    {{ Str::limit(strip_tags($featuredBlog->post_excerpt ?: $featuredBlog->post_content), 180) }}
+
+                                </p>
+
+                                <div class="mt-8">
+
+                                    <a href="{{ url(geturl($featuredBlog->uri, $featuredBlog->page_key)) }}"
+                                        class="inline-flex items-center gap-3 text-[var(--color-secondary)] font-bold text-lg hover:gap-5 transition-all duration-300">
+
+                                        Read Full News
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </a>
+
+                                </div>
+
                             </div>
-                            <!-- DATE -->
-                            <div class="mt-5 text-white/60 text-sm font-semibold tracking-wide uppercase">
-                                June 3, 2025
-                            </div>
-                            <!-- TITLE -->
-                            <h3 class="mt-5 text-3xl md:text-4xl font-bold leading-tight text-white">
-                                Important Notice Regarding Product Distribution & Dealer Verification
-                            </h3>
-                            <!-- TEXT -->
-                            <p class="mt-6 text-white/75 text-[16px] leading-9 max-w-2xl">
-                                Kantipur Vet Distributors issues an important public notice regarding authorized dealer
-                                verification and official distribution channels for veterinary healthcare products across
-                                Nepal.
-                            </p>
-                            <!-- LINK -->
-                            <div class="mt-8">
-                                <a href="#"
-                                    class="inline-flex items-center gap-3 text-[var(--color-secondary)] font-bold text-lg hover:gap-5 transition-all duration-300">
-                                    Read Full Notice
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </a>
-                            </div>
+
                         </div>
+
                     </div>
-                </div>
+                @endif
                 <!-- NEWS LIST -->
                 <div class="space-y-5 reveal">
-                    <!-- ITEM -->
-                    <div class="modern-card bg-white p-7 group cursor-pointer">
-                        <div class="flex items-start justify-between gap-5">
-                            <div>
-                                <div class="text-xs uppercase tracking-[0.15em] font-bold text-[var(--color-secondary)]">
-                                    May 2025
+
+                    @foreach ($blogs->skip(1) as $blog)
+                        <a href="{{ url(geturl($blog->uri, $blog->page_key)) }}">
+
+                            <div class="modern-card bg-white p-7 group cursor-pointer">
+
+                                <div class="flex items-start justify-between gap-5">
+
+                                    <div>
+
+                                        <div
+                                            class="text-xs uppercase tracking-[0.15em] font-bold text-[var(--color-secondary)]">
+
+                                            {{ date('M Y', strtotime($blog->post_date)) }}
+
+                                        </div>
+
+                                        <h4
+                                            class="mt-3 text-xl font-bold leading-8 group-hover:text-[var(--color-primary)] transition">
+
+                                            {{ $blog->post_title }}
+
+                                        </h4>
+
+                                    </div>
+
+                                    <div class="w-12 h-12 rounded-2xl text-[var(--color-primary)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-white transition duration-300"
+                                        style="background-color: rgba(52,47,127,0.1);">
+
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                    </div>
+
                                 </div>
-                                <h4
-                                    class="mt-3 text-xl font-bold leading-8 group-hover:text-[var(--color-primary)] transition">
-                                    New Partnership with Leading European Vaccine Manufacturer
-                                </h4>
+
                             </div>
-                            <div class="w-12 h-12 rounded-2xl text-[var(--color-primary)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-primary)] group-hover:text-white transition duration-300"
-                                style=" background-color: rgba(52, 47, 127, 0.1);">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ITEM -->
-                    <div class="modern-card bg-white p-7 group cursor-pointer">
-                        <div class="flex items-start justify-between gap-5">
-                            <div>
-                                <div class="text-xs uppercase tracking-[0.15em] font-bold text-[var(--color-secondary)]">
-                                    March 2025
-                                </div>
-                                <h4
-                                    class="mt-3 text-xl font-bold leading-8 group-hover:text-[var(--color-primary)] transition">
-                                    KVD Hosts Annual Veterinary Technical Training at KVD Complex
-                                </h4>
-                            </div>
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-green-100 text-[var(--color-secondary)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-secondary)] group-hover:text-white transition duration-300">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ITEM -->
-                    <div class="modern-card bg-white p-7 group cursor-pointer">
-                        <div class="flex items-start justify-between gap-5">
-                            <div>
-                                <div class="text-xs uppercase tracking-[0.15em] font-bold text-[var(--color-secondary)]">
-                                    January 2025
-                                </div>
-                                <h4
-                                    class="mt-3 text-xl font-bold leading-8 group-hover:text-[var(--color-primary)] transition">
-                                    Poultry Disease Alert & Biosecurity Recommendations
-                                </h4>
-                            </div>
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-500 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 group-hover:text-white transition duration-300">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ITEM -->
-                    <div class="modern-card bg-white p-7 group cursor-pointer">
-                        <div class="flex items-start justify-between gap-5">
-                            <div>
-                                <div class="text-xs uppercase tracking-[0.15em] font-bold text-[var(--color-secondary)]">
-                                    December 2024
-                                </div>
-                                <h4
-                                    class="mt-3 text-xl font-bold leading-8 group-hover:text-[var(--color-primary)] transition">
-                                    KVD Awarded Best Animal Health Distributor at Nepal Agri Expo
-                                </h4>
-                            </div>
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-500 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500 group-hover:text-white transition duration-300">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </div>
-                        </div>
-                    </div>
+
+                        </a>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -1522,8 +1513,8 @@
         </div>
     </section>
     <!-- =========================================
-           VIDEO MODAL
-           ========================================= -->
+                           VIDEO MODAL
+                           ========================================= -->
     <div id="videoModal"
         class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-5">
         <!-- CLOSE -->
