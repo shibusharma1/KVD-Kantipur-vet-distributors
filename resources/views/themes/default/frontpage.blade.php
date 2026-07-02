@@ -203,7 +203,9 @@
                 @foreach ($productcategories as $category)
                     <a href="{{ url('page/products?category=' . $category->slug) }}" class="product-card reveal group">
                         <div class="product-card-image">
-                            <img src="{{ asset('uploads/product-category/banner/' . $category->banner_image) }}"
+                            <img src="{{ $category->banner_image
+                                ? asset('uploads/product-category/banner/' . $category->banner_image)
+                                : asset('uploads/products/product-placeholder.jpg') }}"
                                 alt="Product">
                         </div>
 
@@ -920,8 +922,8 @@
     </section>
 
     <!-- =========================================
-                                                                   LATEST NEWS & ANNOUNCEMENTS
-                                                                   ========================================= -->
+                                                                       LATEST NEWS & ANNOUNCEMENTS
+                                                                       ========================================= -->
     <section id="news">
         <!-- BACKGROUND -->
         <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
@@ -1240,7 +1242,7 @@
                             </div>
                         </div>
                         <!-- Factory -->
-                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                        {{-- <div class="modern-card p-4  flex items-start gap-5 reveal">
                             <div
                                 class="w-16 h-16 rounded-3xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
                                 <i class="fa-solid fa-industry text-secondary text-2xl"></i>
@@ -1250,11 +1252,10 @@
                                     Factory Address
                                 </h4>
                                 <p class="mt-2 text-gray-500 leading-8">
-                                    {{-- Hokshe, Kavre --}}
                                     {{ $setting->address2 }}
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Phone -->
                         <div class="modern-card p-4  flex items-start gap-5 reveal">
                             <div
@@ -1361,8 +1362,8 @@
         </div>
     </section>
     <!-- =========================================
-                                                                   VIDEO MODAL
-                                                                   ========================================= -->
+                                                                       VIDEO MODAL
+                                                                       ========================================= -->
     <div id="videoModal"
         class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-5">
         <!-- CLOSE -->

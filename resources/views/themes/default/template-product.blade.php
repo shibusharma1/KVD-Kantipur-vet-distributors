@@ -133,7 +133,7 @@
                                 <div class="product-card-image">
                                     <img src="{{ $product->featured_image
                                         ? asset('uploads/products/' . $product->featured_image)
-                                        : asset('assets/img/product/1.png') }}"
+                                        : asset('uploads/products/product-placeholder.jpg') }}"
                                         alt="{{ $product->name }}">
                                 </div>
                                 <div class="product-card-content">

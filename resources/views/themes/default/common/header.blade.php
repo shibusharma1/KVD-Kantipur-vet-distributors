@@ -36,7 +36,7 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {{-- using GLightbox for gallery previous,next,close --}}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     </head>
 
     <body class="bg-white overflow-x-hidden">
@@ -74,6 +74,9 @@
             </div>
         </div>
 
+        @php
+            $currentUrl = request()->path();
+        @endphp
         <!-- ========================= HEADER ========================= -->
         <header id="main-header" class="scrolled border-b-2 border-secondary">
             <!-- ========================= DESKTOP HEADER ========================= -->
@@ -85,15 +88,16 @@
                             <img src="{{ asset('assets/uploads/img/kantipurvet-logo.png') }}" alt="Kantipur Vet"
                                 class="w-[125px]">
                         </a>
-                  
+
                         <ul class="flex items-center gap-10">
                             <li>
-                                <a href="{{ url('/') }}" class="nav-link">
+                                <a href="{{ url('/') }}"
+                                    class="nav-link {{ request()->path() == '/' ? 'active' : '' }}">
                                     Home
                                 </a>
                             </li>
 
-                            @foreach ($navigations as $row)
+                            {{-- @foreach ($navigations as $row)
                                 @if ($row->id != 2)
                                     <li>
                                         <a href="{{ url('page/' . posttype_url($row->uri)) }}" class="nav-link">
@@ -106,23 +110,96 @@
                                         <a href="{{ url('page/products') }}" class="nav-link flex items-center gap-2">
                                             {{ $row->post_type }}
 
-                                            {{-- <i
+                                            <i
                                                 class="fa-solid fa-chevron-down text-[11px] transition-transform duration-300 group-hover:rotate-180">
-                                            </i> --}}
+                                            </i>
                                         </a>
 
                                         <!-- Dropdown Panel -->
-                                        {{-- <div
+                                        <div
                                             class="absolute left-0 top-full z-50 hidden min-w-[250px] rounded-lg bg-white py-2 shadow-xl group-hover:block">
 
-                                            @foreach ($services as $service)
-                                                <a href="{{ url(geturl($service['uri'], $service['page_key'])) }}"
+                                            @foreach ($productcategories as $productcategory)
+                                                <a href="{{ url('page/products?category=' . $productcategory->slug) }}"
                                                     class="block px-5 py-3 text-sm text-gray-700 transition hover:bg-gray-50">
-                                                    {{ $service->post_title }}
+                                                    {{ $productcategory->name }}
                                                 </a>
                                             @endforeach
 
-                                        </div> --}}
+                                        </div>
+                                    </li>
+                                @endif
+                            @endforeach --}}
+                            @foreach ($navigations as $row)
+                                @if ($row->id != 2 && $row->id != 1)
+                                    <li>
+                                        <a href="{{ url('page/' . posttype_url($row->uri)) }}"
+                                            class="nav-link {{ request()->is('page/' . posttype_url($row->uri)) ? 'active' : '' }}">
+                                            {{ $row->post_type }}
+                                        </a>
+                                    </li>
+                                @elseif ($row->id == 1)
+                                    @php
+                                        $aboutActive =
+                                            request()->is('page/about') ||
+                                            request()->is('page/about.html') ||
+                                            request()->is('page/teams.html') ||
+                                            request()->is('page/corporate-philosophy.html');
+                                    @endphp
+
+                                    <!-- About Dropdown -->
+                                    <li class="relative group">
+                                        <a href="{{ url('page/' . posttype_url($row->uri)) }}"
+                                            class="nav-link flex items-center gap-2 {{ $aboutActive ? 'active' : '' }}">
+                                            {{ $row->post_type }}
+                                            <i
+                                                class="fa-solid fa-chevron-down text-[11px] transition-transform duration-300 group-hover:rotate-180"></i>
+                                        </a>
+
+                                        <div
+                                            class="absolute left-0 top-full z-50 hidden min-w-[250px] rounded-lg bg-white py-2 shadow-xl group-hover:block">
+                                            <a href="{{ url('/page/teams.html') }}"
+                                                class="dropdown-link block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 {{ request()->is('page/teams.html') ? 'active' : '' }}">
+                                                Teams
+                                            </a>
+
+                                            <a href="{{ url('/page/corporate-philosophy.html') }}"
+                                                class="dropdown-link block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 {{ request()->is('page/corporate-philosophy.html') ? 'active' : '' }}">
+                                                Our Philosophy
+                                            </a>
+                                        </div>
+                                    </li>
+                                @else
+                                    @php
+                                        $productActive =
+                                            request()->is('page/products') ||
+                                            request()->is('page/products/*') ||
+                                            request()->has('category');
+                                    @endphp
+
+                                    <!-- Product Dropdown -->
+                                    <li class="relative group">
+                                        <a href="{{ url('page/products') }}"
+                                            class="nav-link flex items-center gap-2 {{ $productActive ? 'active' : '' }}">
+                                            {{ $row->post_type }}
+
+                                            <i
+                                                class="fa-solid fa-chevron-down text-[11px] transition-transform duration-300 group-hover:rotate-180">
+                                            </i>
+                                        </a>
+
+                                        <!-- Dropdown Panel -->
+                                        <div
+                                            class="absolute left-0 top-full z-50 hidden min-w-[250px] rounded-lg bg-white py-2 shadow-xl group-hover:block">
+
+                                            @foreach ($productcategories as $productcategory)
+                                                <a href="{{ url('page/products?category=' . $productcategory->slug) }}"
+                                                    class="dropdown-link block px-5 py-3 text-sm text-gray-700 transition hover:bg-gray-50 {{ request('category') == $productcategory->slug ? 'active' : '' }}">
+                                                    {{ $productcategory->name }}
+                                                </a>
+                                            @endforeach
+
+                                        </div>
                                     </li>
                                 @endif
                             @endforeach
@@ -180,19 +257,57 @@
             </div>
             <!-- Navigation -->
             <nav class="py-2">
-                <a href="{{ url('/') }}" class="offcanvas-nav-link">
+                <a href="{{ url('/') }}" class="offcanvas-nav-link {{ request()->is('/') ? 'active' : '' }}">
                     Home
                 </a>
 
                 @foreach ($navigations as $row)
-                    @if ($row->id != 2)
-                        <a href="{{ url('page/' . posttype_url($row->uri)) }}" class="offcanvas-nav-link">
+                    @if ($row->id != 1 && $row->id != 2)
+                        <a href="{{ url('page/' . posttype_url($row->uri)) }}"
+                            class="offcanvas-nav-link {{ request()->is('page/' . posttype_url($row->uri)) ? 'active' : '' }}">
                             {{ $row->post_type }}
                         </a>
-                    @else
+                    @elseif ($row->id == 1)
+                        @php
+                            $aboutActive =
+                                request()->is('page/about*') ||
+                                request()->is('page/teams.html') ||
+                                request()->is('page/corporate-philosophy.html');
+                        @endphp
+
                         <div>
                             <button onclick="this.nextElementSibling.classList.toggle('hidden')"
-                                class="offcanvas-nav-link w-full">
+                                class="offcanvas-nav-link w-full {{ $aboutActive ? 'active' : '' }}">
+
+                                <span>{{ $row->post_type }}</span>
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </button>
+
+                            <div class="{{ $aboutActive ? '' : 'hidden' }}">
+                                <a href="{{ url('page/' . posttype_url($row->uri)) }}"
+                                    class="offcanvas-nav-link pl-10">
+                                    {{ $row->post_type }}
+                                </a>
+
+                                <a href="{{ url('/page/teams.html') }}"
+                                    class="offcanvas-nav-link pl-10 {{ request()->is('page/teams.html') ? 'active' : '' }}">
+                                    Teams
+                                </a>
+
+                                <a href="{{ url('/page/corporate-philosophy.html') }}"
+                                    class="offcanvas-nav-link pl-10 {{ request()->is('page/corporate-philosophy.html') ? 'active' : '' }}">
+                                    Our Philosophy
+                                </a>
+                            </div>
+                        </div>
+                    @else
+                        @php
+                            $productActive = request()->is('page/products*') || request()->has('category');
+                        @endphp
+
+                        <div>
+                            <button onclick="this.nextElementSibling.classList.toggle('hidden')"
+                                class="offcanvas-nav-link w-full {{ $productActive ? 'active' : '' }}">
 
                                 <span>{{ $row->post_type }}</span>
 
@@ -200,13 +315,18 @@
                             </button>
 
                             <!-- Submenu -->
-                            <div class="hidden bg-gray-50">
+                            <div class="{{ $productActive ? '' : 'hidden' }} bg-gray-50">
 
-                                @foreach ($services as $service)
-                                    <a href="{{ url(geturl($service['uri'], $service['page_key'])) }}"
-                                        class="offcanvas-nav-link pl-10">
+                                <a href="{{ url('page/products') }}"
+                                    class="offcanvas-nav-link pl-10">
+                                    {{ $row->post_type }}
+                                </a>
 
-                                        {{ $service->post_title }}
+                                @foreach ($productcategories as $productcategory)
+                                    <a href="{{ url('page/products?category=' . $productcategory->slug) }}"
+                                        class="offcanvas-nav-link pl-10 {{ request('category') == $productcategory->slug ? 'active' : '' }}">
+
+                                        {{ $productcategory->name }}
 
                                     </a>
                                 @endforeach

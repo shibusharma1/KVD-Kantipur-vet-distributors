@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <!-- Factory -->
-                        <div class="modern-card p-4  flex items-start gap-5 reveal">
+                        {{-- <div class="modern-card p-4  flex items-start gap-5 reveal">
                             <div
                                 class="w-16 h-16 rounded-3xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
                                 <i class="fa-solid fa-industry text-secondary text-2xl"></i>
@@ -69,11 +69,10 @@
                                     Factory Address
                                 </h4>
                                 <p class="mt-2 text-gray-500 leading-8">
-                                    {{-- Hokshe, Kavre --}}
                                     {{ $setting->address2 }}
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Phone -->
                         <div class="modern-card p-4  flex items-start gap-5 reveal">
                             <div class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">

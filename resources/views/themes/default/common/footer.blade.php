@@ -113,7 +113,7 @@
                         </div>
 
                         <!-- Factory -->
-                        <div class="flex gap-4">
+                        {{-- <div class="flex gap-4">
                             <div
                                 class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-white flex-shrink-0">
                                 <i class="fa-solid fa-industry"></i>
@@ -128,7 +128,7 @@
                                     {{ $setting->address2 }}
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Phone -->
                         <div class="flex gap-4">
@@ -184,7 +184,8 @@
                         Terms & Conditions
                     </a>
 
-                    <a href="{{ url('/page/privacy-policy.html') }}" class="text-white/60 text-sm hover:text-white transition duration-300">
+                    <a href="{{ url('/page/privacy-policy.html') }}"
+                        class="text-white/60 text-sm hover:text-white transition duration-300">
                         Privacy Policy
                     </a>
                 </div>
@@ -201,7 +202,7 @@
                 <div>
                     <p class="text-white/60 text-sm text-center lg:text-right">
                         Design & Developed By
-                        <span class="text-secondary font-medium">
+                        <span class="text-secondary font-medium hover:text-white">
                             <a href="https://cyberlink.com.np/">
                                 Cyberlink Pvt. Ltd.
                             </a>
@@ -214,14 +215,66 @@
 </footer>
 
 <!-- ========================= BACK TO TOP ========================= -->
-<button id="backToTop"
+{{-- <button id="backToTop"
     class="fixed bottom-6 right-6 z-50 hidden items-center justify-center
            w-12 h-12 rounded-full bg-secondary text-white shadow-xl
            hover:-translate-y-1 hover:shadow-2xl
            transition-all duration-300">
     <i class="fa-solid fa-arrow-up text-sm"></i>
-</button>
+</button> --}}
 
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $setting->phone) }}?text=Hello%20Kantipur%20Vet,%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+    target="_blank" id="whatsappBtn"
+    class="group hidden fixed bottom-24 right-6 z-50 flex items-center justify-center
+           w-14 h-14 rounded-full bg-[#25D366] text-white
+           shadow-[0_10px_30px_rgba(37,211,102,0.35)]
+           hover:-translate-y-1 hover:scale-105
+           transition-all duration-300">
+
+    <i class="fab fa-whatsapp text-2xl"></i>
+
+    <div
+        class="hidden lg:block absolute right-16
+           bg-white px-4 py-2 rounded-full
+           text-sm font-medium text-gray-700
+           shadow-lg whitespace-nowrap
+
+           opacity-0 translate-x-3
+           group-hover:opacity-100
+           group-hover:translate-x-0
+
+           transition-all duration-300
+           pointer-events-none">
+
+        Need Help?
+
+    </div>
+    <!-- Unread Badge -->
+    <span
+        class="absolute -top-1 -right-1
+               w-6 h-6 rounded-full
+               bg-red-500 text-white
+               text-xs font-bold
+               flex items-center justify-center">
+
+        1
+
+    </span>
+
+</a>
+<button id="backToTop"
+    class="fixed bottom-6 right-6 z-50 hidden items-center justify-center
+           w-14 h-14 rounded-full
+           bg-secondary text-white
+           shadow-xl
+           hover:-translate-y-1
+           hover:shadow-2xl
+           transition-all duration-300">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
 <!-- ========================= SCRIPTS ========================= -->
 <!-- Preloader -->
 <script src="{{ asset('js/preloader.js') }}"></script>

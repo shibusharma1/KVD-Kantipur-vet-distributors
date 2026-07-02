@@ -57,7 +57,7 @@ class FrontpageController extends Controller
     $network = PostTypeModel::where('id', '20')->first();
     $networkcard = PostModel::where('post_type', '20')->orderBy('post_order', 'asc')->latest()->take(4)->get();
 
-    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories', 'videos', 'services', 'service', 'story', 'stories', 'leader', 'leadermessage', 'keypartner', 'keypartnercard','network','networkcard'));
+    return view('themes.default.frontpage', compact('banners', 'about', 'missions', 'mission', 'vision', 'goal', 'blog', 'blogs', 'frontpageData', 'productcategories', 'videos', 'services', 'service', 'story', 'stories', 'leader', 'leadermessage', 'keypartner', 'keypartnercard', 'network', 'networkcard'));
   }
 
   public function posttype($uri)
@@ -69,12 +69,14 @@ class FrontpageController extends Controller
     $setting = SettingModel::where('id', 1)->first();
     $data = PostTypeModel::where('uri', $uri)->first();
     $tmpl['template'] = 'page';
+
     if ($tmpl['template']) {
       $data['template'] = $data['template'];
     }
 
     if ($data) {
-      $posts = PostModel::where('post_type', $data->id)->with('associatePosts')->orderBy('post_order', 'asc')->paginate(6);
+      $perPage = ($uri == 'key-partners') ? 8 : 6;
+      $posts = PostModel::where('post_type', $data->id)->with('associatePosts')->orderBy('post_order', 'asc')->paginate($perPage);
     }
 
     // dd($posts);

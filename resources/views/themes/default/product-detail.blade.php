@@ -36,7 +36,7 @@
                             <div
                                 class="bg-gradient-to-b from-white to-gray-50 rounded-[32px] p-10 flex items-center justify-center">
                                 {{-- <img
-                        src="assets/img/product/1.png"
+                        src="uploads/products/product-placeholder.jpg"
                         alt="Product"
                         class="max-h-[500px] object-contain hover:scale-105 transition duration-700"> --}}
                                 <img src="{{ $product->featured_image
@@ -201,7 +201,7 @@
                         <div class="product-card-image">
                             <img src="{{ $related->featured_image
                                 ? asset('uploads/products/' . $related->featured_image)
-                                : asset('assets/img/product/1.png') }}"
+                                : asset('uploads/products/product-placeholder.jpg') }}"
                                 alt="{{ $related->name }}">
                         </div>
                         <div class="product-card-content">

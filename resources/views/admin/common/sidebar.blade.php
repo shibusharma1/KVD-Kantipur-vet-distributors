@@ -148,7 +148,7 @@
 
 
 
-            @if (checkAuth(9))
+            @if (Auth::id() == 1 || checkAuth(4))
                 <li>
 
                     @if (Request::segment(2) == 'products' ||
@@ -174,7 +174,7 @@
 
                                 <span class="fa fa-arrows-h"></span>
 
-                                Products
+                                Products List
 
                             </a>
 

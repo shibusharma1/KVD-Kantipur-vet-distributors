@@ -1,216 +1,235 @@
 @extends('themes.default.common.master')
-@section('meta_keyword',$data->meta_keyword)
-@section('meta_description',$data->meta_description)
+@section('meta_keyword', $data->meta_keyword ?? 'Our Products')
+{{-- @section('meta_description', $data->meta_description) --}}
 @section('content')
 
-<!-- ========================= PAGE BANNER ========================= -->
-<section class="relative h-[420px] overflow-hidden">
-    <!-- Background -->
-    <img src="{{ $data->banner ? asset('uploads/medium/'.$data->banner) : asset('assets/uploads/img/commit.jpg') }}" alt="{{ $data->post_type }}" loading="lazy" class="w-full h-[420px] object-cover">
-    {{-- <img src="assets/img/commit.jpg" alt="Mission Banner" class="w-full h-full object-cover"> --}}
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/55"></div>
-    <!-- Bottom Gradient -->
-    <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/40 to-transparent"></div>
-    <!-- Content -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-        <p class="text-white/80 uppercase tracking-[0.25em] text-sm reveal">
-            <a href=" {{ url('/') }} ">HOME</a> / {{ $data->post_type }}
-        </p>
-        <h1 class="mt-5 text-white text-4xl md:text-6xl font-bold reveal">
-            {{-- Mission & Vision --}}
-            {{ $data->uid }}
-        </h1>
-    </div>
-</section>
-<!-- ========================= INTRO SECTION ========================= -->
-<section class="py-12 md:py-12 bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <!-- Content -->
-            <div>
-                <p class="section-tag reveal">
-                    Our Commitment
-                </p>
-                <h2 class="mt-5 text-3xl md:text-5xl font-bold leading-tight text-primary reveal">
-                    Dedicated To Better Veterinary Healthcare Solutions.
-                </h2>
-                <p class="mt-8 text-gray-600 leading-8 reveal">
-                    Kantipur Pharmaceuticals Lab Limited is committed to supporting Nepal’s animal healthcare sector through innovative veterinary medicines, feed supplements and high-quality nutritional products.
-                </p>
-                <p class="mt-5 text-gray-600 leading-8 reveal">
-                    Our mission and vision reflect our dedication to animal welfare, livestock productivity and trusted healthcare innovation across the country.
-                </p>
-                <!-- Features -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-10">
-                    <!-- Card -->
-                    <div class="modern-card p-6 reveal">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                            <i class="fa-solid fa-heart-pulse text-primary text-2xl"></i>
-                        </div>
-                        <h4 class="mt-5 text-xl font-semibold text-primary">
-                            Animal Welfare
-                        </h4>
-                        <p class="mt-3 text-sm leading-7 text-gray-500">
-                            Safer and healthier solutions for animals and livestock industries.
-                        </p>
-                    </div>
-                    <!-- Card -->
-                    <div class="modern-card p-6 reveal">
-                        <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                            <i class="fa-solid fa-award text-secondary text-2xl"></i>
-                        </div>
-                        <h4 class="mt-5 text-xl font-semibold text-primary">
-                            Trusted Standards
-                        </h4>
-                        <p class="mt-3 text-sm leading-7 text-gray-500">
-                            Consistent quality and innovation in veterinary healthcare products.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- Image -->
-            <div class="relative reveal">
-                <div class="overflow-hidden rounded-[32px] shadow-2xl">
-                    <img src="assets/img/about.webp" alt="Mission" class="w-full h-[620px] object-cover hover:scale-105 transition duration-700">
-                </div>
-                <!-- Floating Card -->
-                <div class="absolute -bottom-10 -left-5 bg-white rounded-3xl shadow-2xl px-8 py-6 border border-gray-100 hidden md:block">
-                    <h4 class="text-4xl font-bold text-secondary">
-                        ISO
-                    </h4>
-                    <p class="mt-1 text-gray-500 text-sm">
-                        Quality Focused Standards
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ========================= MISSION VISION GOALS ========================= -->
-<section class="py-12 md:py-12 bg-[#F7F8FA] overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Heading -->
-        <div class="max-w-3xl mx-auto text-center mb-8">
-            <p class="section-tag justify-center reveal">
-                Core Values
+    <section class="relative h-[420px] overflow-hidden">
+        <!-- Background -->
+        <img src="{{ asset('assets/uploads/img/vision.jpg') }}" alt="Our Products Banner" loading="lazy"
+            class="w-full h-[420px] object-cover">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/55"></div>
+        <!-- Bottom Gradient -->
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <!-- Content -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+            <p class="text-white/80 uppercase tracking-[0.25em] text-sm reveal">
+                Home / Our Products
             </p>
-            <h2 class="mt-5 text-3xl md:text-5xl font-bold leading-tight text-primary reveal">
-                Mission, Vision & Goals
-            </h2>
+            <h1 class="mt-5 text-white text-4xl md:text-6xl font-bold reveal">
+                Our Products
+            </h1>
         </div>
-        <!-- Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Mission -->
-            <div class="modern-card p-10 text-center relative overflow-hidden reveal">
-                <!-- Icon -->
-                <div class="w-24 h-24 rounded-[28px] bg-primary/10 flex items-center justify-center mx-auto">
-                    <img src="assets/img/icon/mission.png" alt="" class="w-12 h-12">
-                </div>
-                <h3 class="mt-8 text-3xl font-bold text-primary">
-                    Our Mission
-                </h3>
-                <p class="mt-6 text-gray-600 leading-8">
-                    To support the growth and development of Nepal’s animal and poultry industries by delivering trusted veterinary healthcare products and innovative nutritional solutions.
-                </p>
-            </div>
+    </section>
 
-            <!-- Vision -->
-            <div class="modern-card p-10 text-center relative overflow-hidden reveal">
-                <!-- Icon -->
-                <div class="w-24 h-24 rounded-[28px] bg-secondary/10 flex items-center justify-center mx-auto">
-                    <img src="assets/img/icon/vision.png" alt="" class="w-12 h-12">
+    <!-- ========================= PRODUCT SECTION ========================= -->
+    <section class="py-12 md:py-12 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- ========================= SIDEBAR ========================= -->
+                <aside class="lg:col-span-3">
+                    <div class="sticky top-28 space-y-8">
+                        <!-- Category -->
+                        <div class="sidebar-card reveal">
+                            <!-- Heading -->
+                            <div class="px-7 pt-7 pb-5 border-b border-gray-100">
+                                <h3 class="text-2xl font-bold text-primary">
+                                    Product Categories
+                                </h3>
+                            </div>
+                            <!-- Links -->
+                            {{-- <div>
+                                <a href="#" class="sidebar-link">
+                                    <span>Feed Supplement</span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="sidebar-link">
+                                    <span>Veterinary Medicine</span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="sidebar-link">
+                                    <span>Animal Care</span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="sidebar-link">
+                                    <span>Poultry Products</span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="sidebar-link border-b-0">
+                                    <span>Swine Care</span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </div> --}}
+                            <div>
+                                @foreach ($categories as $category)
+                                    <a href="{{ url('page/products?category=' . $category->slug) }}"
+                                        class="sidebar-link {{ request('category') == $category->slug ? 'active' : '' }} {{ $loop->last ? 'border-b-0' : '' }}">
+                                        <span>{{ $category->name }}</span>
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- CTA -->
+                        <div class="relative overflow-hidden rounded-[32px] reveal">
+                            <!-- Background -->
+                            <img src="{{ asset('assets/uploads/img/vision.jpg') }}" alt=""
+                                class="absolute inset-0 w-full h-full object-cover">
+                            <!-- Overlay -->
+                            <div class="absolute inset-0 bg-primary/90"></div>
+                            <!-- Content -->
+                            <div class="relative z-10 p-10 text-center">
+                                <h3 class="text-3xl font-bold text-white leading-tight">
+                                    Need Product Support?
+                                </h3>
+                                <p class="mt-5 text-white/75 leading-8">
+                                    Contact our team for veterinary product information and support.
+                                </p>
+                                <!-- Button -->
+                                <a href="{{ url('page/contact.html') }}" class="white-btn mt-8">
+                                    Contact Us
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- ========================= PRODUCTS ========================= -->
+                <div class="lg:col-span-9">
+                    <!-- Heading -->
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+                        <div>
+                            <p class="section-tag reveal">
+                                Product Collection
+                            </p>
+                            <h2 class="mt-4 text-2xl md:text-3xl font-bold leading-tight text-primary reveal">
+                                Veterinary Healthcare Products
+                            </h2>
+                        </div>
+                        <!-- Search -->
+                        <div class="relative reveal">
+                            <input id="productSearch" type="text" value="{{ request('search') }}"
+                                placeholder="Search products..."
+                                class="w-full md:w-[320px] h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 pr-14 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition duration-300">
+                            <button class="absolute top-1/2 right-5 -translate-y-1/2 text-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- loader --}}
+                    <div id="searchLoader" class="hidden py-12">
+                        <div class="flex justify-center items-center">
+                            <div class="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Grid -->
+                    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        @forelse($products as $product)
+                            <a href="{{ route('page.product_detail', $product->slug) }}"
+                                class="product-card reveal group product-item" data-name="{{ strtolower($product->name) }}">
+                                <div class="product-card-image">
+                                    <img src="{{ $product->featured_image
+                                        ? asset('uploads/products/' . $product->featured_image)
+                                        : asset('uploads/products/product-placeholder.jpg') }}"
+                                        alt="{{ $product->name }}">
+                                </div>
+                                <div class="product-card-content">
+                                    <h3 class="text-sm md:text-base font-semibold text-primary">
+                                        {{ $product->name }}
+                                    </h3>
+                                </div>
+                            </a>
+                        @empty
+                            <div class="col-span-full text-center py-20">
+                                <h3 class="text-2xl font-bold text-primary">
+                                    No Products Found
+                                </h3>
+                            </div>
+                        @endforelse
+                    </div>
+                    <div id="noProductsFound" class="hidden col-span-full">
+                        <div class="modern-card text-center py-16 px-8 rounded-[32px]">
+                            <div class="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                                <i class="fa-solid fa-box-open text-3xl text-primary"></i>
+                            </div>
+                            <h3 class="mt-6 text-2xl font-bold text-primary">
+                                No Products Found
+                            </h3>
+                            <p class="mt-3 text-gray-500 max-w-md mx-auto">
+                                We couldn't find any products matching your search.
+                                Try a different keyword or browse our categories.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- ========================= PAGINATION ========================= -->
+                    <div class="mt-12">
+                        {!! $products->links('themes.default.common.pagination') !!}
+                    </div>
                 </div>
-                <h3 class="mt-8 text-3xl font-bold text-primary">
-                    Our Vision
-                </h3>
-                <p class="mt-6 text-gray-600 leading-8">
-                    To become a nationally and internationally recognized veterinary pharmaceutical company trusted for innovation, safety and healthcare excellence.
-                </p>
-            </div>
-            <!-- Goals -->
-            <div class="modern-card p-10 text-center relative overflow-hidden reveal">
-                <!-- Icon -->
-                <div class="w-24 h-24 rounded-[28px] bg-primary/10 flex items-center justify-center mx-auto">
-                    <img src="assets/img/icon/goal.png" alt="" class="w-12 h-12">
-                </div>
-                <h3 class="mt-8 text-3xl font-bold text-primary">
-                    Our Goals
-                </h3>
-                <p class="mt-6 text-gray-600 leading-8">
-                    To strengthen distribution networks, enhance product innovation and continuously improve veterinary healthcare services throughout Nepal.
-                </p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ========================= IMAGE SHOWCASE ========================= -->
-<section class="py-12 md:py-12 bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            <!-- Image -->
-            <div class="overflow-hidden rounded-[28px] reveal group">
-                <img src="assets/img/commit/img1.jpg" alt="" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
-            </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-            <!-- Image -->
-            <div class="overflow-hidden rounded-[28px] reveal group md:mt-12">
-                <img src="assets/img/commit/img3.jpg" alt="" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
-            </div>
-            
-            <!-- Image -->
-            <div class="overflow-hidden rounded-[28px] reveal group">
-                <img src="assets/img/commit/img4.jpg" alt="" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
-            </div>
-            <!-- Content Card -->
-            <div class="modern-card p-10 flex flex-col justify-center reveal rounded-b-none">
-                <div class="w-20 h-20 rounded-3xl bg-secondary/10 flex items-center justify-center">
-                    <i class="fa-solid fa-seedling text-secondary text-3xl"></i>
-                </div>
-                <h3 class="mt-8 text-3xl font-bold text-primary leading-tight">
-                    Sustainable Growth Through Veterinary Innovation.
-                </h3>
-                <p class="mt-6 text-gray-600 leading-8">
-                    KPL continuously works towards advanced animal healthcare technologies and sustainable veterinary product development for better productivity and healthier livestock.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+            const searchInput = document.getElementById('productSearch');
 
-<!-- ========================= CTA SECTION ========================= -->
-<section class="relative py-12 md:py-12 overflow-hidden">
-    <!-- Background -->
-    <div class="absolute inset-0">
-        <img src="assets/img/vision.jpg" alt="" class="w-full h-full object-cover">
-    </div>
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-primary/90"></div>
-    <!-- Content -->
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="section-tag text-white justify-center reveal">
-            Join With Us
-        </p>
-        <h2 class="mt-5 text-3xl md:text-5xl font-bold leading-tight text-white reveal">
-            Together We Can Build Healthier Animal Communities.
-        </h2>
-        <p class="mt-7 text-white/75 leading-8 max-w-3xl mx-auto reveal">
-            We remain committed to quality veterinary healthcare, trusted partnerships and sustainable livestock development across Nepal.
-        </p>
-        <!-- Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mt-10 reveal">
-            <a href="{{ url('page/contact.html') }}" class="white-btn">
-                Contact Us
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <a href="{{ url('/page/products') }}" class="primary-btn bg-secondary hover:bg-white hover:text-primary">
-                Explore Products
-                <i class="fa-solid fa-box-open"></i>
-            </a>
-        </div>
-    </div>
-</section>
+            const loader = document.getElementById('searchLoader');
 
+            const noProducts = document.getElementById('noProductsFound');
+
+            const items = document.querySelectorAll('.product-item');
+
+            if (!searchInput) return;
+
+            searchInput.addEventListener('keyup', function() {
+
+                loader.classList.remove('hidden');
+
+                setTimeout(() => {
+
+                    let value = this.value.toLowerCase();
+
+                    let visibleCount = 0;
+
+                    items.forEach(function(item) {
+
+                        let name = item.dataset.name;
+
+                        if (name.includes(value)) {
+
+                            item.style.display = '';
+
+                            visibleCount++;
+
+                        } else {
+
+                            item.style.display = 'none';
+
+                        }
+
+                    });
+
+                    if (visibleCount === 0) {
+
+                        noProducts.classList.remove('hidden');
+
+                    } else {
+
+                        noProducts.classList.add('hidden');
+
+                    }
+
+                    loader.classList.add('hidden');
+
+                }, 250);
+
+            });
+
+        });
+    </script>
 @endsection
